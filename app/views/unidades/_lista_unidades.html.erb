@@ -1,0 +1,54 @@
+<br/>  <br/>
+   <font  size="2">
+   <table  class="tabelas" border ="1" cellpadding="1" cellspacing="1" width="100%" >
+     <% for unidade in @unidades %>
+      <tr>
+       <th>Nome</th>
+       <th>Ensino</th>
+       <th>Endereco</th>
+       <th>Num</th>
+       <th>Complemento</th>
+       <th>Bairro</th>
+      </tr>
+      <tr>
+       <td><%=h unidade.nome %></td>
+       <td><%=h unidade.tipo.nome %></td>
+       <td><%=h unidade.endereco %></td>
+       <td><%=h unidade.num %></td>
+       <td><%=h unidade.complemento %></td>
+       <td><%=h unidade.bairro %></td>
+      </tr>
+      <tr>
+       <td rowspan="2" ></td>
+       <th>Fone</th>
+       <th>Email</th>
+       <th>Diretor</th>
+       <th>Coordenador</th>
+       <th>Obs</th>
+      </tr>
+      <tr>
+        <td><%=h unidade.fone %></td>
+        <td><%=h unidade.email %></td>
+        <td><%=h unidade.diretor %></td>
+        <td><%=h unidade.coordenador %></td>
+        <td><%=h unidade.obs %></td>
+     </tr>
+     <tr>
+       <td colspan="12">
+          <div class="botao">
+            <table >
+               <td><%= button_to('Exibir',{:action => "show", :id =>unidade}, :method => "get") %></td>
+               <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
+                 <td> <%= button_to('Editar',{:action => "edit", :id =>unidade}, :method => "get") %></td>
+                 <% if current_user.has_role?('administrador')%>
+                    <td><%= button_to('Excluir',{:action => "destroy", :id =>unidade}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+                 <%end%>
+               <%end%>
+               <td><%= button_to "Mapa", geo_path(unidade.id) %></td>
+            </table>
+           </div>
+       </td>
+    </tr>
+   <% end %>
+  </table>
+ </font>

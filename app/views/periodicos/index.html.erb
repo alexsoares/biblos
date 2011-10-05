@@ -1,0 +1,99 @@
+<br/>
+ <table  class="tabelas"   align="center" width="100%">
+   <tr>
+      <td align="left">
+         <font  size=5><b> ACERVO PERIODICOS</b></font>
+      </td>
+   </tr>
+   <tr>
+     <td colspan="2">
+        <br/>
+        <div class="botao">
+        <table width="100%" align="center">
+          <tr>
+             <td width="6%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+             <td width="6%" align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+             <td align="right" width="25%" >
+                 <font color ="red "size="2">
+                    <b> Total:<%= @periodicos.count %></b>
+                  </font>
+             </td>
+             <td align="right">
+               <div class="botao">
+                <table>
+                  <tr>
+                    <% form_tag periodicos_path, :method => 'get' do %>
+                     <td align="right"><font size="4"> Digitar Titulo:</font>
+                       <%= text_field_tag :search, params[:search] %>
+                       <%= submit_tag "Filtrar", :titulo => nil %>
+                     </td>
+                    <% end %>
+                  </tr>
+                </table>
+                </div>
+             </td>
+         </tr>
+         <tr>
+           <% if  $var == 0 then %>
+             <td align="left" colspan="4"><%= will_paginate @periodicos %></td>
+           <%end%>
+         </tr>
+       </table>
+       <br/>
+       </div>
+       <font  size="2">
+       <table border="2" width="100%">
+          <tr>
+            <th>Tombo</th>
+            <th>ISSN</th>
+            <th>Tipo</th>
+            <th>Título</th>
+            <th>Coleção</th>
+            <th>Periodicidade</th>
+            <th>Localização</th>
+            <th>Unidade</th>
+          </tr>
+         <% @periodicos.each do |periodico| %>
+          <tr>
+            <td align="center"><%=h periodico.tombo %></td>
+            <td align="center"><%=h periodico.issn %></td>
+            <td><%=h periodico.tipo %></td>
+            <td><%=h periodico.titulo %></td>
+            <td><%=h periodico.colecao %></td>
+            <td><%=h periodico.periodicidade%></td>
+            <td><%=h periodico.localguardado %></td>
+            <td><%=h periodico.unidade.nome %></td>
+        </tr>
+      <tr>
+         <td colspan="12">
+           <div class="botao">
+            <table >
+             <td><%= button_to('Exibir',{:action => "show", :id =>periodico}, :method => "get") %></td>
+               <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+                  <td> <%= button_to('Editar',{:action => "edit", :id =>periodico}, :method => "get") %></td>
+                     <% if current_user.has_role?('administrador')%>
+                       <td><%= button_to('Excluir',{:action => "destroy", :id =>periodico}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+                     <%end%>
+               <%end%>
+             </table>
+           </div>
+           </td>
+        </tr>
+        <% end %>
+       </table>
+       <div class="botao">
+         <table width="100%" align="left">
+           <br/>
+          <tr>
+              <td width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+              <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+              <% if  $var == 0 then %>
+                 <td align="left" colspan="3"><%= will_paginate @periodico %></td>
+              <%end%>
+
+        </table>
+        </div>
+     </font>
+  </table>
+<br/>
+

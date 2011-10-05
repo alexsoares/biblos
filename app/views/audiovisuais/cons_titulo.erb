@@ -1,0 +1,50 @@
+<br/><br/>
+<table class="tabelas" align="center" width="80%">
+ <tr>
+   <td colspan="2" align="left">
+      <font  size=5 color="black"> <b> CONSULTA AUDIOVISUAL POR TITULO</b></font>
+   </td>
+  </tr>
+  <tr>
+    <td>
+      <br/>
+       <table>
+        <tr>
+          <td>
+            <div class="botao">
+            <table>
+              <tr>
+                <td><font  size="4" color="black"> Título: <%= collection_select :audiovisuai, :titulo,   @audiovisuaistitulo, :titulo, :titulo, :include_blank => ' -- Selecione -- '  %></font></td>
+              </tr>
+           </table>
+           </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+             <div class="botao">
+              <table width="100%" align="left">
+                <tr>
+                   <td align="left" width="8%" ><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+                   <td align="left" ><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+                </tr>
+             </table>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <%= observe_field 'audiovisuai_titulo',
+               :update => "listagem",
+               :url    => { :action => 'lista_titulo' },
+               :with   => 'audiovisuai_titulo' %>
+            <div id="listagem"> </div>
+         </td>
+       </tr>
+    </table>
+  </td>
+ </table>
+<br>
+
+
+

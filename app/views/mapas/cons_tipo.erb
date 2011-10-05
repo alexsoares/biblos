@@ -1,0 +1,52 @@
+<br/><br/>
+<table class="tabelas" align="center" width="80%">
+ <tr>
+   <td colspan="2" align="left">
+      <font  size=5 color="black"> <b> CONSULTA MAPA POR TIPO</b></font>
+   </td>
+  </tr>
+  <tr>
+    <td>
+      <br/>
+       <table>
+        <tr>
+          <td>
+            <div class="botao">
+            <table>
+              <tr>
+                <td>
+                   <font  size="4" color="black"> Tipo: <%= select :mapa,:tipo, TIPOSMAPA.sort {|e0,e1| e0[0] <=> e1[0]}, :include_blank => '---Selecione---'%></font>
+                 </td>
+              </tr>
+           </table>
+           </div>
+          </td>
+         </tr>
+        <tr>
+          <td>
+             <div class="botao">
+              <table width="100%" align="left">
+                <tr>
+                   <td align="left" width="8%" ><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+                   <td align="left" ><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+                </tr>
+             </table>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <%= observe_field 'mapa_tipo',
+               :update => "listagem",
+               :url    => { :action => 'lista_tipo' },
+               :with   => 'mapa_tipo' %>
+            <div id="listagem"> </div>
+         </td>
+       </tr>
+    </table>
+  </td>
+ </table>
+<br>
+
+
+

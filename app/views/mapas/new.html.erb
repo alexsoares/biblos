@@ -1,0 +1,68 @@
+<br/><br/>
+<% form_for(@mapa) do |f| %>
+<%= f.error_messages %>
+<font  size="2">
+ <table class="tabelas" width="80%" align="center">
+  <tr>
+   <td colspan="2" align="left">
+     <font  size=5><b> CADASTRO DE MAPAS</b></font>
+   </td>
+  </tr>
+  <tr>
+    <td>
+      <fieldset><legend><font  size=4> Mapas</font></legend>
+        <table >
+            <tr>
+              <td align="left"><b>Tombo(Local):</b></td>
+              <td align="left"><%= f.text_field :tombo, :size =>15 %></td>
+           </tr>
+           <tr>
+              <td align="left"><b>Tipo Mapa:</b></td>
+              <td align="left"><%= f.select :tipo, TIPOSMAPA.sort {|e0,e1| e0[0] <=> e1[0]}, :include_blank => '---Selecione---'%></td>
+              <td align="right"> <b> Título:</b></td>
+              <td align="left"><%= f.text_field :titulo, :size =>45 %></td>
+           </tr>
+           <tr>
+              <td align="left"><b>Formato:</b></td>
+              <td align="left" colspan="2"><%= f.text_field :formato, :size =>25 %>
+              <td align="left"  colspan="2"><b>Editora:</b>
+                    <%= f.collection_select  :editora_id, @editoras, :id, :nome, :include_blank => ' -- Selecione -- ' %></td>
+
+           </tr>
+           <tr>
+              <td align="left"><b>Ano do Mapa:</b></td>
+              <td align="left" colspan="7"><%= f.date_select(:data, :order => [:year], :start_year => (Date.today.year)-100) %></td>
+            </tr>
+            <tr>
+             <td align="left"><b>Forma Aquisição:</b></td>
+              <td align="left" colspan="2"><%= f.select :aquisicao, FORMAAQUISICAO.sort {|e0,e1| e0[0] <=> e1[0]}, :include_blank => '---Selecione---'%></td>
+              <td align="left" colspan="2"><b>Data Aquisição:</b>
+                <%= f.date_select(:dataaquisicao, :order => [:day, :month, :year], :start_year => (Date.today.year)-20) %></td>
+            </tr>
+            <tr>
+               <td align="left"><b>Localização:</b></td>
+               <td align="left"> <%= f.text_field :localguardado, :size =>15%></td>
+               <td align="right"><b>Unidade:</b></td>
+               <td align="left" colspan="5"><%= f.collection_select  :unidade_id, @unidades, :id, :nome, :include_blank => ' -- Selecione -- ' %></td>
+            </tr>
+            <tr>
+               <td align="left" valign="top"><b>Observações:</b></td>
+               <td align="left" colspan="7  "><%= f.text_area(:obs, :cols =>"96", :rows => "2") %></td>
+            </tr>
+       </table>
+      </fieldset>
+      <table>
+          <tr>
+            <div id='Certeza'>
+               <td align="left" width="8%"><%= f.submit "Salvar" %></td>
+            </div>
+            <% end %>
+            <td align="left" ><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+          </tr>
+      </table>
+ </table>
+</font>
+
+
+
+

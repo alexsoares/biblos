@@ -1,0 +1,77 @@
+<br/><br/>
+<table class="tabelas" align="center" width="100%">
+ <tr>
+   <td colspan="2" align="left">
+      <font  size=5 color="black"> <b> CONSULTA PERIODICO POR UNIDADE</b></font>
+   </td>
+  </tr>
+  <tr>
+    <td>
+      <br/>
+       <table>
+        <tr>
+          <td>
+           <div class="botao">
+            <table>
+              <tr>
+                <td align="left" width="62%"><font  size="4" color="black"> Unidade: <%= collection_select :periodico, :unidade_id, @unidades, :id, :nome, :include_blank => ' -- Selecione -- '  %></font></td>
+                <td align="left"><font size ="3" color="red"> OBS: Selecionar primeiro a UNIDADE e depois, se desejar, outra opção de filtro em CONSULTA POR  </font></td>
+             </tr>
+             <tr>
+               <td colspan="3">
+                <fieldset><legend><font  size="3">Consulta por</font></legend>
+                 <table>
+                   <tr>
+                      <td align="left"><font  size="3" color="black"> Periodicidade: <%= collection_select :periodico, :periodicidade,   @periodicosperiodicidade, :periodicidade, :periodicidade, :include_blank => ' -- Selecione -- '  %></font></td>
+                      <td align="left"><font  size="3" color="black"> Tipo: <%= collection_select :periodico, :tipo, @periodicostipo, :tipo, :tipo, :include_blank => ' -- Selecione -- '  %></font></td>
+                      <td align="left"><font  size="3" color="black"> Título: <%= collection_select :periodico, :titulo, @periodicostitulo, :titulo, :titulo, :include_blank => ' -- Selecione -- '  %></font></td>
+                   </tr>
+                </table>
+               </fieldset>
+              </td>
+             </tr>
+             <div class="botao">
+              <table width="100%" align="left">
+                <tr>
+                   <td align="left" width="8%" ><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+                   <td align="left" width="8%"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+                   <td align="left"  ><%= button_to 'Nova Consulta', cons_unidade_pe_path, {:method => "get"} %></td>
+                   <td align="center"><font size ="3" color="red"> <=== Para realizar nova consulta clicar no botão <br/> NOVA CONSULTA  </font></td>
+                </tr>
+             </table>
+            </div>
+          </table>
+          </div>
+          </td>
+        <tr>
+          <td>
+          <%= observe_field 'periodico_unidade_id',
+               :update => "listagem",
+               :url    => { :action => 'lista_unidade' },
+               :with   => 'periodico_unidade_id' %>
+            <div id="listagem"> </div>
+          <%= observe_field 'periodico_periodicidade',
+               :update => "listagem",
+               :url    => { :action => 'lista_unidade_periodicidade' },
+               :with   => 'periodico_periodicidade' %>
+            <div id="listagem"> </div>
+          <%= observe_field 'periodico_tipo',
+               :update => "listagem",
+               :url    => { :action => 'lista_unidade_tipo' },
+               :with   => 'periodico_tipo' %>
+            <div id="listagem"> </div>
+          <%= observe_field 'periodico_titulo',
+               :update => "listagem",
+               :url    => { :action => 'lista_unidade_titulo' },
+               :with   => 'periodico_titulo' %>
+            <div id="listagem"> </div>
+         </td>
+       </tr>
+    </table>
+
+</td>
+</table>
+<br>
+
+
+

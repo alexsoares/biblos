@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  tombo: 1
+  titulo: MyString
+  tiposmapa: 
+  formato: MyString
+  editora: MyString
+  data: 2011-09-19 11:01:28
+  aquisicao: MyString
+  dataaquisicao: 2011-09-19 11:01:28
+  localguardado: MyString
+  unidade: 
+  obs: MyString
+
+two:
+  tombo: 1
+  titulo: MyString
+  tiposmapa: 
+  formato: MyString
+  editora: MyString
+  data: 2011-09-19 11:01:28
+  aquisicao: MyString
+  dataaquisicao: 2011-09-19 11:01:28
+  localguardado: MyString
+  unidade: 
+  obs: MyString

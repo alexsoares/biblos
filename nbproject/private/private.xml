@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/home/seduc/biblos/app/controllers/application.rb</file>
+        <file>file:/home/seduc/biblos/app/controllers/application_controller.rb</file>
+        <file>file:/home/seduc/biblos/app/views/audiovisuais/titulo.erb</file>
+        <file>file:/home/seduc/biblos/app/views/tipos/new.html.erb</file>
+        <file>file:/home/seduc/biblos/db/migrate/20101001122400_create_tipos.rb</file>
+        <file>file:/home/seduc/biblos/db/migrate/20101004110726_create_unidades.rb</file>
+        <file>file:/home/seduc/biblos/db/migrate/20110915164756_create_tiposmapas.rb</file>
+    </open-files>
+</project-private>

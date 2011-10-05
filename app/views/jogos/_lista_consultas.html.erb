@@ -1,0 +1,63 @@
+       <font  size="2">
+       <table border="2" width="100%">
+          <tr>
+            <td align="right" colspan="7">
+                <font color ="red "size="2">
+                   <b> Total de Jogos:<%= @jogos.count %></b>
+                </font>
+            </td>
+          </tr>
+          <tr>
+            <th>Tombo(SEDUC)</th>
+            <th>Tombo(Local)</th>
+            <th>Título</th>
+            <th>Faixa Etária</th>
+            <th>Descrição</th>
+            <th>Localização</th>
+            <th>Unidade</th>
+          </tr>
+         <% @jogos.each do |jogo| %>
+          <tr>
+            <td align="center"><%=h jogo.id %></td>
+            <td align="center"><%=h jogo.tombo %></td>
+            <td><%=h jogo.nome %></td>
+            <td><%=h jogo.faixaetaria %></td>
+            <td><%=h jogo.descricao %></td>
+            <td><%=h jogo.localguardado %></td>
+            <td><%=h jogo.unidade.nome %></td>
+        </tr>
+      <tr>
+         <td colspan="12">
+           <div class="botao">
+            <table >
+             <td><%= button_to('Exibir',{:action => "show", :id =>jogo}, :method => "get") %></td>
+               <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+                  <td> <%= button_to('Editar',{:action => "edit", :id =>jogo}, :method => "get") %></td>
+                     <% if current_user.has_role?('administrador')%>
+                       <td><%= button_to('Excluir',{:action => "destroy", :id =>jogo}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+                     <%end%>
+               <%end%>
+             </table>
+           </div>
+           </td>
+        </tr>
+        <% end %>
+       </table>
+       <div class="botao">
+         <table width="100%" align="left">
+           <br/>
+          <tr>
+              <td width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+              <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+              <% if  $var == 0 then %>
+                 <td align="left" colspan="3"><%= will_paginate @jogos %></td>
+              <%end%>
+
+        </table>
+        </div>
+     </font>
+<br/>
+
+
+
+

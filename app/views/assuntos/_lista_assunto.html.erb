@@ -1,0 +1,19 @@
+<br/>
+<font size="3">
+<table border="1" width="100%">
+  <tr>
+    <th colspan="2" width="80%">Assunto:</th>
+    <th></th>
+  </tr>
+  <% for assunto in @assunto %>
+  <tr>
+    <td><font size="2"><%=h assunto.nome %></font></td>
+      <div class="botao">
+        <% if current_user.has_role?('administrador')%>
+           <td align="right"><%= button_to('Excluir',{:action => "destroy", :id =>assunto}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+        <%end%>
+      </div>
+  </tr>
+<% end %>
+</table>
+</font>

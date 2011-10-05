@@ -1,0 +1,73 @@
+
+<br/><br/>
+<table class="tabelas" align="center" width="100%">
+ <tr>
+     <td colspan="2" align="left">
+       <font  size=5 color="black"> <b>  EDITORAS </b></font>
+    </td>
+   </tr>
+ <tr>
+ <td>
+ <font  size="2">
+ <table width="100%"  >
+  <tr>
+    <td width="50%" valign="top">
+      <% form_for(@editora) do |f| %>
+        <fieldset><legend><font  size=4> Cadastrar Editora</font></legend>
+         <table>
+           <tr>
+             <td width="20%"align="left"><b>Nome:</b></td>
+             <td align="left"colspan="3"><%= f.text_field :nome %>
+                   <%= observe_field 'editora_nome',
+                      :frequency => 0.1,
+                      :update => "cadastrados",
+                      :with => :editora_nome,
+                     :url => { :action => 'lista' } %>
+             </td>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><b>Cidade:</b></td>
+               <td align="left"colspan="3"><%= f.text_field :cidade %></td>
+            </tr>
+            <tr>
+               <td width="20%"align="left"><b>Pais:</b></td>
+               <td align="left"><%= f.text_field :pais %></td>
+           </tr>
+           <tr>
+            <div class="botao">
+               <td align="left"width="1%" ><%= f.submit "Salvar" %></td>
+               <% end %>
+               <td align="left" width="1%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+               <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+            </div>
+          </tr>
+         </table>
+        </fieldset>
+        <br/>
+        <fieldset><legend><font color="red"> OBSERVAÇÕES:</font></legend>
+        <table>
+           <tr><td align="left"><font color="red">1)VERIFICAR EDITORAS JÁ CADASTRADAS ANTES DE CADASTRAR UMA NOVA.</font> </td></tr>
+           <tr><td align="left"><font color="red">2)PARA CONSULTAR DIGITE A PRIMEIRA LETRA NA CAIXA "NOME" .</font> </td></tr>
+           <tr><td align="left"><font color="red">3)VERIFICAR À ESQUERDA AS EDITOAS JÁ CADASTRADAS. </font> </td></tr>
+
+        </table>
+        </fieldset>
+     </td>
+     <td width="50%" valign="top">
+         <fieldset><legend><font  size=4> Editoras Cadastrados</font></legend>
+          <table width="100%">
+           <tr>
+              <td align="left">
+                <div id="cadastrados"></div>
+              </td>
+           </tr>
+          </table>
+         </fieldset>
+       </td>
+     </tr>
+   </table>
+  </font>
+ </td>
+</table>
+<br/>
+

@@ -1,0 +1,46 @@
+<br/>
+<font size="2">
+<table width="40%"align="center">
+<tr>
+<td>
+<fieldset><legend><font  size=5> ANEXO DOCUMENTO CHAMADO Nº<%=h @externo.id %></font></legend>
+<table width="100%">
+  <tr>
+    <td align="left"><b>Titulo:</b></td>
+    <td align="left" colspan="2"><%=h @documento.titulo %></td>
+  </tr>
+  <tr>
+    <td align="left" width="20%"><b>Descrição:</b></td>
+    <td align="left" colspan="2"><%=h @documento.descricao %></td>
+  </tr>
+  <tr>
+    <td align="left"><b>Visualizar:</b></td>
+    <td align="left" colspan="2"><%= link_to image_tag(@documento.documento.url(:thumb), :size => "50x50"), @documento.documento.url %></td>
+  </tr>
+
+ <div class="botao">
+   <table>
+    <tr>
+      <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+      <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+       <td align="left" width="8%"> <%= button_to('Editar', {:action => "edit", :id =>  @documento}, :method => "get") %></td>
+      <%end%>
+     <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+    </tr>
+  </table>
+  </div>
+ </table>
+</fieldset>
+</td>
+</tr>
+</table>
+</font>
+<br/>
+
+
+
+
+
+
+
+,

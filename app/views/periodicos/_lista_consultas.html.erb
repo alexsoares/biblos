@@ -1,0 +1,56 @@
+   <font  size="2">
+   <table  class="tabelas" border ="1" cellpadding="1" cellspacing="1" width="100%" >
+         <tr>
+            <td align="right" colspan="8">
+                <font color ="red "size="2">
+                   <b> Total de Periodicos:<%= @periodico.count %></b>
+                </font>
+            </td>
+         </tr>
+         <tr>
+            <th>Tombo</th>
+            <th>ISSN</th>
+            <th>Tipo</th>
+            <th>Título</th>
+            <th>Coleção</th>
+            <th>Periodicidade</th>
+            <th>Localização</th>
+            <th>Unidade</th>
+          </tr>
+         <% @periodico.each do |periodico| %>
+          <tr>
+            <td align="center"><%=h periodico.tombo %></td>
+            <td align="center"><%=h periodico.issn %></td>
+            <td><%=h periodico.tipo %></td>
+            <td><%=h periodico.titulo %></td>
+            <td><%=h periodico.colecao %></td>
+            <td><%=h periodico.periodicidade%></td>
+            <td><%=h periodico.localguardado %></td>
+            <td><%=h periodico.unidade.nome %></td>
+        </tr>
+      <tr>
+         <td colspan="12">
+           <div class="botao">
+            <table >
+             <td><%= button_to('Exibir',{:action => "show", :id =>periodico}, :method => "get") %></td>
+               <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+                  <td> <%= button_to('Editar',{:action => "edit", :id =>periodico}, :method => "get") %></td>
+                     <% if current_user.has_role?('administrador')%>
+                       <td><%= button_to('Excluir',{:action => "destroy", :id =>periodico}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+                     <%end%>
+               <%end%>
+             </table>
+           </div>
+           </td>
+        </tr>
+        <% end %>
+  </table>
+  <div class="botao">
+    <table width="100%" align="left">
+      <tr>
+        <td align="left" width="8%" ><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+        <td align="left" ><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+      </tr>
+    </table>
+  </div>
+  </font>

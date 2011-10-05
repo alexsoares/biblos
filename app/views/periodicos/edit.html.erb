@@ -1,0 +1,73 @@
+<br/><br/>
+<% form_for(@periodico) do |f| %>
+<%= f.error_messages %>
+<font  size="2">
+ <table class="tabelas" width="90%" align="center">
+  <tr>
+   <td colspan="2" align="left">
+     <font  size=5><b> CADASTRO DE PERIODICOS</b></font>
+   </td>
+  </tr>
+  <tr>
+    <td>
+      <fieldset><legend><font  size=4> Periódicos</font></legend>
+        <table>
+           <tr>
+              <td align="left"><b>Tombo (SEDUC):</b></td>
+              <td align="left"><font color="blue"> <%=h @periodico.id %> </font></td>
+              <td align="left" colspan="3"><b> Tombo(Local):</b><%= f.text_field :tombo, :size =>10 %>
+                  <b>ISSN:</b><%= f.text_field :issn, :size =>10 %></td>
+           </tr>
+           <tr>
+              <td align="left"><b>Periodicidade:</b></td>
+              <td align="left"> <%= f.select :periodicidade, PERIODICIDADE.sort {|e0,e1| e0[0] <=> e1[0]}, :include_blank => '---Selecione---', :size => 15%></td>
+              <td align="left" colspan="2"><b> Tipo:</b><%= f.select :tipo, TIPOPERIODICO.sort {|e0,e1| e0[0] <=> e1[0]}, :include_blank => '---Selecione---'%></td>
+           </tr>
+           <tr>
+               <td align="left"><b> Titulo:</b></td>
+               <td align="left"  colspan="5"><%= f.text_field :titulo, :size =>40%>
+                 <b> Coleção:</b><%= f.text_field :colecao, :size =>22%></td>
+           </tr>
+           <tr>
+              <td align="left"><b>Produção:</b></td>
+              <td align="left" colspan="5"><%= f.text_field :producao, :size =>32%>
+              <b>Local Produção:</b><%= f.text_field :localproducao, :size =>24%>
+              </td>
+           </tr>
+           <tr>
+              <td align="left"><b>Data Produção:</b></td>
+              <td align="left" colspan="5"><%= f.date_select(:dataproducao, :order => [:day, :month, :year], :start_year => (Date.today.year)-100) %></td>
+           </tr>
+            <tr>
+              <td align="left"><b>Forma Aquisição:</b></td>
+              <td align="left" colspan="5"><%= f.select :aquisicao, FORMAAQUISICAO.sort {|e0,e1| e0[0] <=> e1[0]}, :include_blank => '---Selecione---'%>
+                  <b>Data Aquisição:</b>
+                  <%= f.date_select(:dataaquisicao, :order => [:day, :month, :year], :start_year => (Date.today.year)-20) %>
+              </td>
+            </tr>
+            <tr>
+               <td align="left"><b>Localização:</b></td>
+               <td align="left" colspan="5"> <%= f.text_field :localguardado, :size =>18%>
+                 <b>Unidade:</b><%= f.collection_select  :unidade_id, @unidades, :id, :nome, :include_blank => ' -- Selecione -- ' %></td>
+            </tr>
+            <tr >
+               <td align="left" valign="top"><b>Observações:</b></td>
+               <td align="left" colspan="7"><%= f.text_area(:obs, :cols =>"96", :rows => "2") %></td>
+            </tr>
+          </table>
+      </fieldset>
+      <table>
+          <tr>
+            <div id='Certeza'>
+               <td align="left" width="8%"><%= f.submit "Salvar" %></td>
+            </div>
+            <% end %>
+            <td align="left" ><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+          </tr>
+      </table>
+    </td>
+   </tr>
+ </table>
+</font>
+
+

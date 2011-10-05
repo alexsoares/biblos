@@ -1,0 +1,33 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  tombo: MyString
+  titulo: MyString
+  colecao: MyString
+  producao: MyString
+  tipo: MyString
+  periodicidade: MyString
+  issn: 1
+  localproducao: MyString
+  dataproducao: 2011-09-05 08:56:11
+  aquisicao: MyString
+  dataaquisicao: 2011-09-05 08:56:11
+  localguardado: MyString
+  unidade: 
+  obs: MyString
+
+two:
+  tombo: MyString
+  titulo: MyString
+  colecao: MyString
+  producao: MyString
+  tipo: MyString
+  periodicidade: MyString
+  issn: 1
+  localproducao: MyString
+  dataproducao: 2011-09-05 08:56:11
+  aquisicao: MyString
+  dataaquisicao: 2011-09-05 08:56:11
+  localguardado: MyString
+  unidade: 
+  obs: MyString

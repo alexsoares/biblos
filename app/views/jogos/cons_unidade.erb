@@ -1,0 +1,72 @@
+<br/><br/>
+<table class="tabelas" align="center" width="100%">
+ <tr>
+   <td colspan="2" align="left">
+      <font  size=5 color="black"> <b> CONSULTA JOGO POR UNIDADE</b></font>
+   </td>
+  </tr>
+  <tr>
+    <td>
+      <br/>
+       <table>
+        <tr>
+          <td>
+            <div class="botao">
+            <table>
+              <tr>
+                <td align="left" width="65%"><font  size="4" color="black"> Unidade: <%= collection_select :jogo, :unidade_id, @unidades, :id, :nome, :include_blank => ' -- Selecione -- '  %></font></td>
+                <td align="left"><font size ="3" color="red"> OBS: Selecionar primeiro a UNIDADE e depois, se desejar, outra opção de filtro em CONSULTA POR  </font></td>
+              </tr>
+              <tr>
+               <td colspan="3">
+                <fieldset><legend><font  size="3">Consulta por</font></legend>
+                 <table>
+                   <tr>
+                     <td align="left"><font  size="3" color="black"> Faixa Etária:<%= select :jogo,:faixaetaria, FAIXAETARIA.sort {|e0,e1| e0[0] <=> e1[0]}, :include_blank => '---Selecione---'%></font></td>
+                     <td align="left"><font  size="3" color="black"> Título: <%= collection_select :jogo, :nome, @jogostitulo, :nome, :nome, :include_blank => ' -- Selecione -- '  %></font></td>
+                   </tr>
+                 </table>
+               </fieldset>
+              </td>
+             </tr>
+             <div class="botao">
+              <table width="100%" align="left">
+                <tr>
+                   <td align="left" width="8%" ><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+                   <td align="left" width="8%" ><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+                   <td align="left" width="8%"  ><%= button_to 'Nova Consulta', cons_unidade_jogo_path, {:method => "get"} %></td>
+                   <td align="center"><font size ="3" color="red"> <=== Para realizar nova consulta clicar no botão <br/> NOVA CONSULTA  </font></td>
+
+               </tr>
+             </table>
+            </div>
+           </table>
+          </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <%= observe_field 'jogo_unidade_id',
+               :update => "listagem",
+               :url    => { :action => 'lista_unidade' },
+               :with   => 'jogo_unidade_id' %>
+            <div id="listagem"> </div>
+           <%= observe_field 'jogo_faixaetaria',
+               :update => "listagem",
+               :url    => { :action => 'lista_unidade_faixaetaria' },
+               :with   => 'jogo_faixaetaria' %>
+            <div id="listagem"> </div>
+          <%= observe_field 'jogo_nome',
+               :update => "listagem",
+               :url    => { :action => 'lista_unidade_titulo' },
+               :with   => 'jogo_nome' %>
+            <div id="listagem"> </div>
+         </td>
+       </tr>
+    </table>
+   </td>
+ </table>
+<br>
+
+
+

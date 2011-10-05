@@ -1,0 +1,64 @@
+ <table class="tabelas"  align="center" width="100%">
+  <tr>
+       <td colspan="2" align="left">
+         <font  size=5 color="black"> <b>INFORMATIVOS</b></font>
+       </td>
+      </tr>
+  <tr>
+   <td>
+     <br/>
+     <div class="botao">
+     <table width="100%">
+      <tr>
+        <td width="6%" align="left"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+ 
+        <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+           <td align="left">  <%= button_to 'Novo', new_informativo_path %></td>
+        <%end%>
+      </tr>
+    </table>
+    <br/>
+    </div>
+     <font  size="2">
+      <table border="2" width="100%" >
+       <tr>
+          <th>Mensagem</th>
+          <th>De</th>
+          <th>Até</th>
+        </tr>
+        <% @informativos.each do |informativo| %>
+          <tr>
+            <td><%=h informativo.mensagem %></td>
+            <td><%=h informativo.starts_at.strftime("%d/%m/%Y %H:%M") %></td>
+            <td><%=h informativo.ends_at.strftime("%d/%m/%Y %H:%M") %></td>
+          </tr>
+          <tr>
+            <td colspan="3">
+                <div class="botao">
+                <table>
+                   <td><%= button_to('Exibir',{:action => "show", :id =>informativo}, :method => "get") %></td>
+                   <% if current_user.has_role?('administrador') %>
+                     <td> <%= button_to('Editar',{:action => "edit", :id =>informativo}, :method => "get") %></td>
+                     <td><%= button_to('Excluir',{:action => "destroy", :id =>informativo}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+                   <%end%>
+                </table>
+                </div>
+               </td>
+          </tr>
+        <% end %>
+      </table>
+      <br/>
+      <div class="botao">
+      <table width="100%">
+        <tr>
+          <td width="6%" align="left"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+          <td width="6%" align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+          <td align="left">  <%= button_to 'Novo', new_informativo_path %></td>
+        </tr>
+      </table>
+    </div>
+      </font>
+  </td>
+ </table>
+<br/>
+<br/>

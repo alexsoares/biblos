@@ -1,0 +1,62 @@
+
+<br/><br/>
+<font size="2">
+ <table  class="tabelas"   align="center" width="60%">
+   <tr>
+     <td colspan="2" align="left">
+        <font  size=4><b> GERENCIAMENTO DE ACESSO</b></font>
+     </td>
+   </tr>
+   <tr>
+    <td>
+      <table>
+       <tr>
+         <td width="6%"><%= button_to 'Associar', new_roles_user_path %></td>
+         <td align="left" ><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+        </tr>
+      </table>
+      <table border="2" align="center">
+        <tr>
+          <th>Login</th>
+          <th>Acesso de</th>
+          <th>Descricao</th>
+        </tr>
+        <% for role_user in @role_users %>
+        <tr>
+          <td align="center" width="25%"><%= User.find(role_user.user_id).login %></td>
+          <td align="center"><%= Role.find(role_user.role_id).name %></td>
+          <%if Role.find(role_user.role_id).name == 'administrador' then%>
+            <td align="center">Usuário administrador do sistema. Acesso total ao sistema.</td>
+          <%else%>
+             <td align="center"> Acesso restrito ao sistema.</td>
+          <%end%>
+        </tr>
+        <tr>
+           <td colspan="12">
+             <div class="botao">
+             <table>
+                <td><%= button_to('Exibir',{:action => "show", :id =>role_user}, :method => "get") %></td>
+                  <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+                    <td> <%= button_to('Editar',{:action => "edit", :id =>role_user}, :method => "get") %></td>
+                       <% if current_user.has_role?('administrador')%>
+                         <td><%= button_to('Excluir',{:action => "destroy", :id =>role_user}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+                       <%end%>
+                 <%end%>
+             </table>
+             </div>
+           </td>
+         </tr>
+        <% end %>
+       </table>
+      <table width="60%"  align="left">
+        <tr>
+          <td width="6%"><%= button_to 'Associar', new_roles_user_path %></td>
+          <td align="left" ><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+        </tr>
+     </table>
+   </td>
+  </tr>
+</table>
+</font>
+<br/>
+

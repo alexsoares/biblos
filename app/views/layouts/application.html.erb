@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>SGI - SEDUC / PMA</title>
+
+    <%= stylesheet_link_tag 'biblos', 'calendar',"style",'menu', :cache => true %>
+    <%= stylesheet_link_tag 'impressao', :media => "print" %>
+    <%= stylesheet_link_tag 'calendar_impressao', :media => "print" %>
+    <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css"%>
+    <%= javascript_include_tag 'jquery','jquery-ui','jrails' %>
+
+
+ <style media="print">
+.botao {
+display: none;
+}
+</style>
+
+ </head>
+ <body>
+
+ <div id="contents">
+  <table class="tabelas">
+  <td>
+  <div id="informacao">
+        <% unless informativos_corrente.empty? %>
+          <div id="announcement">
+            <p><h2 align="center">Quadro de Avisos</h2></p>
+            <div id="color"  align="center">
+
+              <%for informativo in informativos_corrente %>
+                <p><%= informativo.mensagem %></p>
+                <p>===============================================================================================</p>
+              <%end%>
+            </div>
+            <h3 align="center"><b><%= link_to_remote("Ocultar esta mensagem", :url => {:controller => 'javascripts', :action => 'hide_announcement'}) %></b></h3>
+          </div>
+        <%end%>
+  </div>
+  </td>
+  </table>
+<div class="botao">
+  <div id="header">
+    <br/>
+    <div id="topo">
+      <br/><br/><br/><br/><br/>
+       <table>
+        <tr>
+          <td width="72%"align="left"></td>
+          <td align="right"> <h4><font   size ="2"> Americana <%= Time.now.strftime("%d de %B de %Y") %></font></h4>
+        </tr>
+      </table>
+
+
+       </div>
+        <%if logged_in? then%>
+          <font size="4" color="green"><%= link_to h(current_user.login.capitalize), edit_user_path(current_user) %>  </font>
+            <% if current_user.has_role?('administrador') %>
+              Acesso de Administrador do Sistema
+            <%else%>
+              <% if current_user.has_role?('bibliotecario') %>
+                  Acesso de Bibliotecario(a)
+                  <%else%>
+                    <% if current_user.has_role?('SEDUC') %>
+                       Acesso de Funcinário(a) SEDUC
+                    <%else%>
+                       <% if current_user.has_role?('estagiario') %>
+                          Acesso de  Estagiário(a)
+                       <%else%>>
+                          Acesso de  Usuário(a)
+                       <%end%>
+                   <%end%>
+               <%end%>
+            <%end%>
+          <font style="color: red"><%= flash[:notice] %></font>
+        <%else%>
+           <%= link_to '|Entrar|', login_path %>
+           <font style="color: red"><%= flash[:notice] %></font>
+        <%end%>
+    </div>
+      <div id="menu">
+        <div class="nav-container-outer">
+           <img src="/stylesheets/images/nav-bg-l.jpg" alt="" class="float-left" />
+           <img src="/stylesheets/images/nav-bg-r.jpg" alt="" class="float-right" />
+           <ul id="nav-container" class="nav-container">
+              <li><a class="item-primary" href="#">Arquivo</a>
+                <ul style="width:108px;">
+                  <li><%= link_to 'Inicio', root_path %></li>
+                  <li><%= link_to 'Sair', logout_path,:confirm => "Tem certeza que deseja fazer logout?" %></li>
+                </ul>
+              </li>
+              <% if current_user.has_role?('SEDUC') or current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+              <li><span class="divider divider-vert" ></span></li>
+              <li><a class="item-primary" href="#">Unidades</a>
+                 <ul style="width:108px;">
+                       <% if current_user.has_role?('administrador')%>
+                          <li><%= link_to "Cadastrar",new_unidade_path %></li>
+                       <%end%>
+                       <li><a>Consultar</a>
+                         <ul>
+                           <li><%= link_to('por Endereço', c_uni_end_path) %></li>
+                           <li><%= link_to('por Nome', c_uni_uni_path) %></li>
+                           <li><%= link_to('por Tipo', c_uni_tp_path) %></li>
+                           <li><%= link_to('Todas', unidades_path)%></li>
+                         </ul>
+                       </li>
+                       <li><span class="divider divider-horiz" ></span></li>
+                       <li><%= link_to "Mapa", geo_path%></li>
+                 </ul>
+              </li>
+              <%end%>
+              <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+              <li><span class="divider divider-vert" ></span></li>
+              <li><a class="item-primary" href="#;">Manutenção</a>
+                 <ul style="width:108px;">
+                  <li><a>Cadastros</a>
+                      <ul>
+                        <li><%= link_to "Areas",new_area_path %></li>
+                        <li><%= link_to "Assuntos",new_assunto_path %></li>
+                         <li><%= link_to "Editoras",new_editora_path %></li>
+                        <li><%= link_to "Gênero Midia",new_generomidia_path %></li>
+                        <li><a>ISBN</a>
+                           <ul>
+                              <li><%= link_to "Cadastrar",new_isbn_path %></li>
+                              <li><%= link_to "Consultar",isbns_path %></li>
+                           </ul>
+                        </li>
+                        <li><%= link_to "Tipo Unidade",new_tipo_path %></li>
+                      </ul>
+                  </li>
+                  <% if current_user.has_role?('administrador') %>
+                   <li><a>Usuários</a>
+                     <ul>
+                       <li><%= link_to 'Associar', new_roles_user_path %></li>
+                       <li><%= link_to 'Gerenciar', roles_users_path %></li>
+                     </ul>
+                   </li>
+                  <%end%>             
+                 </ul>
+              </li>
+              <%end%>
+              <li><span class="divider divider-vert" ></span></li>
+              <li><a class="item-primary" href="#;">Acervo</a>
+                 <ul style="width:108px;">
+                  <li><a>Audiovisuais</a>
+                    <ul>
+                         <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+                           <li id="about"><%= link_to_remote('Cadastrar', :update => 'conteudo',:url => { :action => "regras", :controller => 'audiovisuais'}) %></li>
+                        <%end%>
+                        <li><a>Consultar</a>
+                         <ul>
+                           <li><%= link_to('por Gênero', cons_genero_av_path) %></li>
+                           <li><%= link_to('por Título', cons_titulo_av_path) %></li>
+                           <li><%= link_to('por Unidade', cons_unidade_av_path) %></li>
+                           <li><%= link_to('Todos', audiovisuais_path)%></li>
+                         </ul>
+                      </li>
+                    </ul>
+                   </li>
+                   <li><a>Jogos</a>
+                     <ul>
+                       <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+                           <li id="about"><%= link_to_remote('Cadastrar', :update => 'conteudo',:url => { :action => "regras", :controller => 'jogos'}) %></li>
+                       <%end%>
+                       <li><a>Consultar</a>
+                         <ul>
+                           <li><%= link_to('por Faixa Etária',cons_faixaetaria_jogo_path) %></li>
+                           <li><%= link_to('por Título',cons_titulo_jogo_path) %></li>
+                           <li><%= link_to('por Unidade', cons_unidade_jogo_path) %></li>
+                           <li><%= link_to('Todos', jogos_path)%></li>
+                         </ul>
+                       </li>
+                     </ul>
+                   </li>
+                   <li><a>Livros</a>
+                     <ul>
+                       <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+                         <li><%= link_to "Cadastrar",new_livro_path %></li>
+                       <%end%>
+                       <li><a>Consultar</a>
+                         <ul>
+                           <li><%= link_to('por Área',cons_area_livro_path) %></li>
+                           <li><%= link_to('por Assunto',cons_assunto_livro_path) %></li>
+                           <li><%= link_to('por ISBN',cons_isbn_livro_path) %></li>
+                           <li><%= link_to('por Título',cons_titulo_livro_path) %></li>
+                           <li><%= link_to('por Unidade', cons_unidade_livro_path) %></li>
+                           <li><%= link_to('Todos', livros_path)%></li>
+                         </ul>
+                       </li>
+                     </ul>
+                   </li>
+                   <li><a>Mapas</a>
+                     <ul>
+                       <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+                         <li id="about"><%= link_to_remote('Cadastrar', :update => 'conteudo',:url => { :action => "regras", :controller => 'mapas'}) %></li>
+                       <%end%>
+                       <li><a>Consultar</a>
+                         <ul>
+                           <li><%= link_to('por Tipo',cons_tipo_mapa_path) %></li>
+                           <li><%= link_to('por Título',cons_titulo_mapa_path) %></li>
+                           <li><%= link_to('por Unidade', cons_unidade_mapa_path) %></li>
+                           <li><%= link_to('Todos', mapas_path)%></li>
+                         </ul>
+                       </li>
+                     </ul>
+                   </li>
+                   <li><a>Periodicos</a>
+                     <ul>
+                        <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+                           <li id="about"><%= link_to_remote('Cadastrar', :update => 'conteudo',:url => { :action => "regras", :controller => 'periodicos'}) %></li>
+                        <%end%>
+                       <li><a>Consultar</a>
+                         <ul>
+                           <li><%= link_to('por Periodicidade',cons_periodicidade_pe_path) %></li>
+                           <li><%= link_to('por Tipo',cons_tipo_pe_path) %></li>
+                           <li><%= link_to('por Título',cons_titulo_pe_path) %></li>
+                           <li><%= link_to('por Unidade', cons_unidade_pe_path) %></li>
+                           <li><%= link_to('Todos', periodicos_path)%></li>
+                         </ul>
+                       </li>
+                     </ul>
+                   </li>
+               </ul>
+             </li>
+              <li><a class="item-primary" href="#;">Informativos</a>
+                 <ul style="width:108px;">
+                  <li id="about"><%= link_to_remote('Normas e Regras', :update => 'conteudo',:url => { :action => "regras", :controller => 'livros'}) %></li>
+                  
+                     <li><a>Informativo</a>
+                         <ul>
+                           <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+                              <li><%= link_to "Novo",new_informativo_path %></li>
+                           <%end%>
+                           <li><%= link_to "Todos",informativos_path  %></li>
+                        </ul>
+                      </li>
+                 </ul>
+              </li>
+             <li class="clear">&nbsp;</li>
+          </ul>
+        </div>
+      </div>
+   </div>
+   <div id="principal">
+     <div id="conteudo">
+        <%= yield  %>
+     </div>
+   </div>
+  </div>
+ </body>
+</html>
+

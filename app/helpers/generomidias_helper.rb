@@ -1,0 +1,2 @@
+module GeneromidiasHelper
+end

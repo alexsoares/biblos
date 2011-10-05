@@ -1,0 +1,45 @@
+<br/><br/><br/><br/>
+<table width="50%" class="tabelas" align="center">
+ <tr>
+   <td align="left">
+     <font  size=4><b> NÍVEL DE ACESSO</b></font>
+   </td>
+ </tr>
+ <tr>
+  <td align="left">
+   <font  size=2>
+   <table width="100%">
+     <% form_for(@role_user) do |f| %>
+     <%@user = User.find(:all,:conditions => ['id = ' + @role_user.user_id.to_s])%>
+     <%= f.error_messages %>
+      <tr>
+       <td><%= f.label :user_id,'Selecione o Usuário' %></td>
+       <td><%= f.collection_select  :user_id,@user, :id, :login, :include_blank => ' -- Selecione -- ' %>
+      </tr>
+      <tr>
+       <td><%= f.label :role_id,'Selecione o nível de acesso :' %></td>
+       <td><%= f.collection_select  :role_id,@roles, :id, :name, :include_blank => ' -- Selecione -- ' %>
+             <%= observe_field :roles_user_role_id,
+             :with => :roles_user_role_id,
+             :url => { :action => 'role_id' } %>
+             <div id="aviso"></div>
+       </tr>
+  </table>
+ </font>
+ <br/>
+ <table  width="100%" align="center">
+   <tr>
+     <td align="left" width="8%">
+         <%= f.submit "Associar" %>
+    </td>
+     <% end %>
+     <td align="left" ><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+   </tr>
+  </table>
+  </td>
+ </tr>
+</table>
+<br/>
+
+
+

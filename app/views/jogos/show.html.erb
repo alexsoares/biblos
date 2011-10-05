@@ -1,0 +1,76 @@
+<br/>
+<font size="2">
+<table  class="tabelas" width="60%"align="center">
+   <tr>
+      <td colspan="2" align="left">
+         <font  size=5 color="black"> <b>JOGO</b></font>
+      </td>
+  </tr>
+  <tr>
+   <td>
+     <fieldset><legend><font  size=4> Dados</font></legend>
+      <table>
+        <tr>
+           <td align="left"><b>Tombo (SEDCUC):</b></td>
+           <td align="left">  <%=h @jogo.id %></td>
+        </tr>
+        <tr>
+           <td align="left"><b>Tombo (Local):</b></td>
+           <td align="left">  <%=h @jogo.tombo %></td>
+        </tr>
+        <tr>
+          <td align="left"><b>Nome:</b></td>
+          <td align="left">  <%=h @jogo.nome %></td>
+       </tr>
+       <tr>
+         <td align="left"><b>Faixa Etária:</b></td>
+         <td align="left"><%=h @jogo.faixaetaria %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> Fabricante:</b></td>
+         <td align="left">  <%=h @jogo.fabricante %></td>
+       </tr>
+       <tr>
+         <td align="left"><b>Descrição:</b></td>
+         <td align="left">  <%=h @jogo.descricao %></td><p>
+       </tr>
+       <tr>
+         <td align="left"><b>Forma Aquisição:</b></td>
+         <td align="left"><%=h @jogo.aquisicao %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> Data Aquisição:</b></td>
+         <td align="left">  <%=h @jogo.dataaquisicao.strftime("%d de %B de %Y") %></td><p>
+       </tr>
+       <tr>
+         <td align="left"><b>Localização:</b></td>
+         <td align="left">  <%=h @jogo.localguardado%></td><p>
+       </tr>
+      <tr>
+         <td align="left"><b>Unidade:</b></td>
+         <td align="left">   <%=h @jogo.unidade.nome %></td>
+      </tr>
+      <tr>
+         <td valign="top" align="left"><b>Observações:</b></td>
+         <td align="left">  <%=h @jogo.obs %></td>
+      </tr>
+    </table>
+    </fieldset>
+     <div class="botao">
+      <table>
+        <tr>
+          <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+           <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+             <td align="left" width="8%"> <%= button_to('Editar', {:action => "edit", :id => @jogo}, :method => "get") %></td>
+             <td align="left" width="8%"><%= button_to 'Cadastrar', new_jogo_path, {:method => "get"} %></td>
+           <%end%>
+          <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+        </tr>
+      </table>
+     </div>
+   </td>
+  </tr>
+ </table>
+</font>
+<br/>
+

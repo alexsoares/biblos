@@ -1,0 +1,91 @@
+<br/>
+<font size="2">
+<table  class="tabelas" width="60%"align="center">
+   <tr>
+      <td colspan="2" align="left">
+         <font  size=5 color="black"> <b>AUDIOVISUAL</b></font>
+      </td>
+  </tr>
+  <tr>
+   <td>
+     <fieldset><legend><font  size=4> Dados</font></legend>
+      <table>
+        <tr>
+           <td align="left"><b>Tombo (SEDCUC):</b></td>
+           <td align="left">  <%=h @audiovisuai.id %></td>
+        </tr>
+        <tr>
+           <td align="left"><b>Tombo (Local):</b></td>
+           <td align="left">  <%=h @audiovisuai.tombo %></td>
+        </tr>
+        <tr>
+          <td align="left"><b>Tipo Midia:</b></td>
+          <td align="left">  <%=h @audiovisuai.tipo %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> Gênero:</b></td>
+         <td align="left">   <%=h @audiovisuai.generomidia.nome %></td>
+       </tr>
+       <tr>
+         <td align="left"><b>Título:</b></td>
+         <td align="left"><%=h @audiovisuai.titulo %></td>
+       </tr>
+       <tr>
+         <td align="left"><b>Subtítulo:</b></td>
+         <td align="left"><%=h @audiovisuai.subtitulo %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> Coleção:</b></td>
+         <td align="left">  <%=h @audiovisuai.colecao %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> Produção:</b></td>
+         <td align="left">  <%=h @audiovisuai.producao%></td>
+       </tr>
+       <tr>
+         <td align="left"><b>Local Produção:</b></td>
+         <td align="left">  <%=h @audiovisuai.localproducao %></td>
+       </tr>
+       <tr>
+         <td align="left"><b>Ano Produçao:</b></td>
+         <td align="left">  <%=h @audiovisuai.dataproducao.strftime("%Y") %></td><p>
+       </tr>
+       <tr>
+         <td align="left"><b>Forma Aquisição:</b></td>
+         <td align="left"><%=h @audiovisuai.aquisicao %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> Data Aquisição:</b></td>
+         <td align="left">  <%=h @audiovisuai.dataaquisicao.strftime("%d de %B de %Y") %></td><p>
+       </tr>
+       <tr>
+         <td align="left"><b>Localização:</b></td>
+         <td align="left">  <%=h @audiovisuai.localguardado%></td><p>
+       </tr>
+      <tr>
+         <td align="left"><b>Unidade:</b></td>
+         <td align="left">   <%=h @audiovisuai.unidade.nome %></td>
+      </tr>
+      <tr>
+         <td valign="top" align="left"><b>Observações:</b></td>
+         <td align="left">  <%=h @audiovisuai.obs %></td>
+      </tr>
+    </table>
+    </fieldset>
+     <div class="botao">
+      <table>
+        <tr>
+          <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+           <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+             <td align="left" width="8%"> <%= button_to('Editar', {:action => "edit", :id => @audiovisuai}, :method => "get") %></td>
+             <td align="left" width="8%"> <%= button_to'Cadastrar', new_audiovisuai_path, {:method => "get"}%></td>
+           <%end%>
+          <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+        </tr>
+      </table>
+     </div>
+   </td>
+  </tr>
+ </table>
+</font>
+<br/>

@@ -1,0 +1,120 @@
+<table class="tabelas" align="center" width="100%">
+<tr><td>
+<table class="tabelas" align="center" width="100%">
+ <tr>
+   <td colspan="2" align="left">
+      <font  size=5 color="black"> <b> CONSULTA AUDIOVISUAL POR UNIDADE</b></font>
+   </td>
+  </tr>
+  <tr>
+    <td>
+      <br/>
+       <table>
+        <tr>
+          <td>
+            <div class="botao">
+            <table>
+              <tr>
+                <td align="left" width="65%"><font  size="4" color="black"> Unidade: <%= collection_select :audiovisuai, :unidade_id, @unidades, :id, :nome, :include_blank => ' -- Selecione -- '  %></font></td>
+                <td align="left"><font size ="2" color="red"> OBS: Selecionar primeiro a UNIDADE e depois, se desejar, outra opção de filtro em CONSULTA POR  </font></td>
+              </tr>
+              <tr>
+               <td colspan="3">
+                <fieldset><legend><font  size="3">Consulta por</font></legend>
+                 <table>
+                   <tr>
+                    <td align="left"><font  size="3" color="black"> Gênero: <%= collection_select :audiovisuai, :generomidia_id, @generomidias, :id, :nome, :include_blank => ' -- Selecione -- '  %></font></td>
+                    <td align="left"><font  size="3" color="black"> Tipo Midia: <%= collection_select :audiovisuai, :midia_id, @midias, :id, :nome, :include_blank => ' -- Selecione -- '  %></font></td>
+                   </tr>                      
+                   <tr>
+                    <% form_tag cons_unidade_av_path, :method => 'get' do %>
+                     <td align="right"><font size="3"> Título:</font>
+                       <%= text_field_tag :searchUnidade_av, params[:searchUnidade_av] %>
+                       <%= submit_tag "Filtrar", :titulo => nil %>
+                     </td>
+                    <% end %>
+                   </tr>
+
+                 </table>
+               </fieldset>
+              </td>
+             </tr>
+             <div class="botao">
+              <table width="100%" align="left">
+                <tr>
+                   <td align="left" width="8%" ><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+                   <td align="left" width="8%" ><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+                   <td align="left" width="8%" ><%= button_to 'Nova Consulta', cons_unidade_av_path, {:method => "get"} %></td>
+                   <td align="left"><font size ="2" color="red"> <= Para realizar nova consulta clicar no botão NOVA CONSULTA  </font></td>
+                </tr>
+             </table>
+            </div>
+           </table>
+          </div>
+          </td>
+        </tr>
+    </table>
+   </td>
+  </tr>
+  <tr>
+    <td>
+    <font  size="2">
+       <table  class="tabelas" border ="1" cellpadding="1" cellspacing="1" width="100%" >
+          <tr>
+            <th>Tombo(SEDUC)</th>
+            <th>Tombo(Local)</th>
+            <th>Midia</th>
+            <th>Título</th>
+            <th>Coleção</th>
+            <th>Gênero</th>
+            <th>Localização</th>
+            <th>Unidade</th>
+          </tr>
+         <% @audiovisuais.each do |audiovisuai| %>
+          <tr>
+            <td><%=h audiovisuai.id %></td>
+            <td><%=h audiovisuai.tombo %></td>
+            <td><%=h audiovisuai.midia.nome %></td>
+            <td><%=h audiovisuai.titulo %></td>
+            <td><%=h audiovisuai.colecao %></td>
+            <td><%=h audiovisuai.generomidia.nome %></td>
+            <td><%=h audiovisuai.localguardado %></td>
+            <td><%=h audiovisuai.unidade.nome %></td>
+
+        </tr>
+      <tr>
+         <td colspan="12">
+           <div class="botao">
+            <table >
+             <td><%= button_to('Exibir',{:action => "show", :id =>audiovisuai}, :method => "get") %></td>
+               <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+                  <td> <%= button_to('Editar',{:action => "edit", :id =>audiovisuai}, :method => "get") %></td>
+                     <% if current_user.has_role?('administrador')%>
+                       <td><%= button_to('Excluir',{:action => "destroy", :id =>audiovisuai}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+                     <%end%>
+               <%end%>
+             </table>
+           </div>
+           </td>
+        </tr>
+        <% end %>
+      </table>
+     </font>
+    </td>
+   </tr>
+   <tr>
+     <td>
+        <div class="botao">
+          <table  width="100%" align="left">
+            <tr>
+               <td align="left" width="8%" ><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+               <td align="left" ><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+           </tr>
+          </table>
+        </div>
+      </td>
+   </tr>
+ </table>
+</td></tr>
+
+</table>

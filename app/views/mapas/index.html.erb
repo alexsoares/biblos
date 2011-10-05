@@ -1,0 +1,102 @@
+<br/>
+ <table  class="tabelas"   align="center" width="100%">
+   <tr>
+      <td align="left">
+         <font  size=5><b> ACERVO MAPAS</b></font>
+      </td>
+   </tr>
+   <tr>
+     <td colspan="2">
+        <br/>
+        <div class="botao">
+        <table width="100%" align="center">
+          <tr>
+             <td width="6%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+             <td width="6%" align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+             <td align="right" width="25%" >
+                 <font color ="red "size="2">
+                    <b> Total:<%= @mapas.count %></b>
+                  </font>
+             </td>
+             <td align="right">
+               <div class="botao">
+                <table>
+                  <tr>
+                    <% form_tag mapas_path, :method => 'get' do %>
+                     <td align="right"><font size="4"> Digitar Titulo:</font>
+                       <%= text_field_tag :search, params[:search] %>
+                       <%= submit_tag "Filtrar", :titulo => nil %>
+                     </td>
+                    <% end %>
+                  </tr>
+                </table>
+                </div>
+             </td>
+         </tr>
+         <tr>
+           <% if  $var == 0 then %>
+             <td align="left" colspan="4"><%= will_paginate @mapas %></td>
+           <%end%>
+         </tr>
+       </table>
+       <br/>
+       </div>
+       <font  size="2">
+       <table border="2" width="100%">
+          <tr>
+            <th>Tombo(SEDUC)</th>
+            <th>Tombo(Local)</th>
+            <th>Tipo</th>
+            <th>Título</th>
+            <th>Formato</th>
+            <th>Editora</th>
+            <th>Localização</th>
+            <th>Unidade</th>
+          </tr>
+         <% @mapas.each do |mapa| %>
+          <tr>
+            <td align="center"><%=h mapa.id %></td>
+            <td align="center"><%=h mapa.tombo %></td>
+            <td><%=h mapa.tipo %></td>
+            <td><%=h mapa.titulo %></td>
+            <td><%=h mapa.formato %></td>
+            <td><%=h mapa.editora.nome %></td>
+            <td><%=h mapa.localguardado %></td>
+            <td><%=h mapa.unidade.nome %></td>
+
+        </tr>
+      <tr>
+         <td colspan="12">
+           <div class="botao">
+            <table >
+             <td><%= button_to('Exibir',{:action => "show", :id =>mapa}, :method => "get") %></td>
+               <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+                  <td> <%= button_to('Editar',{:action => "edit", :id =>mapa}, :method => "get") %></td>
+                     <% if current_user.has_role?('administrador')%>
+                       <td><%= button_to('Excluir',{:action => "destroy", :id =>mapa}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+                     <%end%>
+               <%end%>
+             </table>
+           </div>
+           </td>
+        </tr>
+        <% end %>
+       </table>
+       <div class="botao">
+         <table width="100%" align="left">
+           <br/>
+          <tr>
+              <td width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+              <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+              <% if  $var == 0 then %>
+                 <td align="left" colspan="3"><%= will_paginate @mapas %></td>
+              <%end%>
+
+        </table>
+        </div>
+     </font>
+  </table>
+<br/>
+
+
+
