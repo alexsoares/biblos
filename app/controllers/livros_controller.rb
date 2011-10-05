@@ -131,8 +131,8 @@ def lista_titulo
   end
 
 def lista_area
-     session[:area] = params[:livro_area_id]
-    @livros = Livro.find(:all, :conditions => ['area_id=' + session[:area]])
+     $area = params[:livro_area_id]
+    @livros = Livro.find(:all, :conditions => ['area_id='+ $area])
     render :partial => 'lista_consultas'
   end
 

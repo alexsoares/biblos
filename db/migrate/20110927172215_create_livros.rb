@@ -5,9 +5,9 @@ class CreateLivros < ActiveRecord::Migration
       t.references :isbn
       t.datetime :dataedicao
       t.references :area
-      t.string :as
-      t.string :ass
-      t.string :assu
+      t.string :assunto1
+      t.string :assunto2
+      t.string :assunto3
       t.string :resumo
       t.string :aquisicao
       t.datetime :dataaquisicao
