@@ -40,7 +40,6 @@ class LivrosController < ApplicationController
   # GET /livros/new
   # GET /livros/new.xml
   def new
-    @isbn = Isbn.find_by_nisbn(1)
     @livro = Livro.new
 
     respond_to do |format|
@@ -50,9 +49,9 @@ class LivrosController < ApplicationController
   end
 
   def dados_isbn
-    session[:numero] = params[:isbn_isbn_id]
-    @isbn = Isbn.find(:all, :conditions => ["isbn_id = " , +session[:numero]])
-
+    session[:numero] = params[:livro_isbn_id].to_i
+    @isbn = Isbn.find(session[:numero])
+    render :partial => "isbn"
   end
 
   # GET /livros/1/edit
@@ -63,7 +62,7 @@ class LivrosController < ApplicationController
 
  end
 def novo_isbn
-      session[:numero] = params[:livro_isbn_id]
+     session[:numero] = params[:livro_isbn_id]
      @isbn = Isbn.find_by_nisbn(session[:numero])
  #   @livro= Isbn.find(:all, :conditions => ['isbn_id=' + session[:numero]])
      render :partial => 'lista'

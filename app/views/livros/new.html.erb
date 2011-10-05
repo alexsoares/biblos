@@ -24,37 +24,12 @@
               <td align="left"><b>ISBN:</b></td>
               <td align="left" colspan="2"><%= f.collection_select  :isbn_id, @isbns, :id, :nisbn, :include_blank => ' -- Selecione -- ' %></td>
              <td align="left" colspan="3"><b>Tombo(Local):<%= f.text_field :tombo, :size =>10 %></b></td>
-                   <%= observe_field 'isbn_isbn_id',
+                   <%= observe_field 'livro_isbn_id',
+                       :update => "isbn",
                        :url    => { :action => 'dados_isbn' },
-                       :with   => 'isbn_isbn_id' %>
+                       :with   => 'livro_isbn_id' %>
            </tr>
-           <tr>
-               <td align="left"><b> Título:</b></td>
-               <td align="left" colspan="8" ><%=h @isbn.titulo %></td>
-
-           </tr>
-           <tr>
-              <td align="left"><b>Coleção:</b></td>
-              <td align="left" colspan="4"><%=h @isbn.colecao%></td>
-
-           </tr>
-           <tr>
-               <td align="left"><b> Autor:</b></td>
-               <td align="left" colspan="7" ><%=h @isbn.autor %></td>
-           </tr>
-           <tr>
-               <td align="left"><b>Editora:</b></td>
-               <td align="left" colspan="3" ><%=h @isbn.editora.nome %></td>
-               <td align="right"><b> Local Edição:</b></td>
-               <td align="left" colspan="2"><%=h @isbn.localedicao %>
-               </td>
-           </tr>
-           <tr>
-
-             <td align="left"><b>Edição: </b></td>
-             <td align="left"><%=h @isbn.edicao %>° -
-             <b>Data Edição:</b><%= f.date_select(:dataedicao, :order => [:year], :start_year => (Date.today.year)-100) %></td>
-           </tr>
+           <tr><td><div id="isbn"></div></td></tr>          
            <tr>
              <td align="left"><b> Área:</b></td>
              <td align="left" colspan="4" ><%= f.collection_select  :area_id, @areas, :id, :nome, :include_blank => ' -- Selecione -- ' %>
