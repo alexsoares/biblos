@@ -16,15 +16,14 @@
             <td align="left" colspan="8">
             <font color="red"> <b> <u>OBSERVAÇÕES:</u></b></font>
               <ul>
-              <li><font color="red">Para alterar dados sem caixa de edição, selecionar o n° <b>ISBN"</b></font></li>
-              <li><font color="red"> Se o título iniciar com artigo cadastra-lo no final. Ex: <b>"O sítio do Pica-Pau Amarelo"</b>,  cadastrar <b>"Sitio do Pica-Pau Amarelo, O"</b></font></li>
+              <li><font color="red">Selecionar o n° <b>ISBN" para vizualizar o título</b></font></li>
               </ul>
            </td>
           </tr>
            <tr>
              <td align="left"><b>Tombo (SEDUC):</b></td>
-              <td align="left" colspan="3">  <font color="blue"><b><%=h @livro.id %></b></font>
-              - <b>Tombo(Local): </b><%= f.text_field :tombo, :size => 7  %></td>
+              <td align="left" colspan="3">  <font color="blue"><b><%=h @livro.id %></b></font> --
+                <b>Tombo(Local): </b><%= f.text_field :tombo, :size => 7  %></td>
              <td align="left" colspan="3"><b>ISBN:</b><%= f.collection_select  :isbn_id, @isbns, :id, :nisbn, :include_blank => ' -- Selecione -- ' %>
                  <%= observe_field 'isbn_isbn_id',
                        :update => "lista",
@@ -40,8 +39,7 @@
            <tr>
               <td align="left"><b>Coleção:</b></td>
               <td align="left" colspan="4"><%=h @isbn.colecao%></td>
-              <td align="left"><b>Edição: </b><%=h @isbn.edicao %></td>
-              <td align="left" colspan="2"><b>Data Edição:</b><%=h @isbn.dataedicao.strftime("%Y") %></td>
+
            </tr>
            <tr>
                <td align="left"><b> Autor:</b></td>
@@ -55,14 +53,24 @@
                </td>
            </tr>
            <tr>
-               <td align="left"><b> Área:</b></td>
-               <td align="left" colspan="7" ><%= f.collection_select  :area_id, @areas, :id, :nome, :include_blank => ' -- Selecione -- ' %>
+
+             <td align="left"><b>Edição: </b></td>
+             <td align="left"><%=h @isbn.edicao %>° -
+             <b>Data Edição:</b><%= f.date_select(:dataedicao, :order => [:year], :start_year => (Date.today.year)-100) %></td>
+           </tr>
+           <tr>
+             <td align="left"><b> Área:</b></td>
+             <td align="left" colspan="4" ><%= f.collection_select  :area_id, @areas, :id, :nome, :include_blank => ' -- Selecione -- ' %>
            <tr>
                <td align="left"><b> Assunto(1):</b></td>
                <td align="left" colspan="2"><%= f.collection_select  :assunto1, @assuntos, :nome, :nome, :include_blank => ' -- Selecione -- ' %></td>
-               <td align="right"><b> Assunto(2):
+           </tr>
+           <tr>
+               <td align="left"><b> Assunto(2):
                <td align="left" ></b><%= f.collection_select  :assunto2, @assuntos, :nome, :nome, :include_blank => ' -- Selecione -- ' %></td>
-               <td align="right"><b> Assunto(3):</b></td>
+           </tr>
+           <tr>
+              <td align="left"><b> Assunto(3):</b></td>
                <td align="left"><%= f.collection_select  :assunto3, @assuntos, :nome, :nome, :include_blank => ' -- Selecione -- ' %></td
 
            </tr>
@@ -78,9 +86,8 @@
             </tr>
             <tr>
                <td align="left"><b>Localização:</b></td>
-               <td align="left" colspan="2"> <%= f.text_field :localguardado, :size =>15%></td>
-               <td align="right"><b>Unidade:</b></td>
-               <td align="left" colspan="5"><%= f.collection_select  :unidade_id, @unidades, :id, :nome, :include_blank => ' -- Selecione -- ' %></td>
+               <td align="left" colspan="7"> <%= f.text_field :localguardado, :size =>15%>
+               <b>Unidade:</b><%= f.collection_select  :unidade_id, @unidades, :id, :nome, :include_blank => ' -- Selecione -- ' %></td>
             </tr>
             <tr >
                <td align="left"><b>Observações:</b></td>
@@ -99,4 +106,7 @@
       </table>
  </table>
 </font>
+
+
+
 
