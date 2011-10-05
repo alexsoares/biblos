@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20110927172215) do
     t.string   "tombo"
     t.string   "tipo"
     t.string   "titulo"
+    t.string   "subtitulo"
     t.string   "colecao"
     t.string   "producao"
     t.integer  "generomidia_id"
@@ -51,7 +52,8 @@ ActiveRecord::Schema.define(:version => 20110927172215) do
 
   create_table "editoras", :force => true do |t|
     t.string   "nome"
-    t.string   "obs"
+    t.string   "cidade"
+    t.string   "pais"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -73,10 +75,10 @@ ActiveRecord::Schema.define(:version => 20110927172215) do
   create_table "isbns", :force => true do |t|
     t.string   "nisbn"
     t.string   "titulo"
+    t.string   "subtitulo"
     t.string   "colecao"
     t.string   "edicao"
     t.integer  "editora_id"
-    t.datetime "dataedicao"
     t.string   "localedicao"
     t.string   "autor"
     t.string   "obs"
@@ -100,12 +102,13 @@ ActiveRecord::Schema.define(:version => 20110927172215) do
   end
 
   create_table "livros", :force => true do |t|
-    t.integer  "tombo"
+    t.string   "tombo"
     t.integer  "isbn_id"
+    t.datetime "dataedicao"
     t.integer  "area_id"
-    t.string   "assunto1"
-    t.string   "assunto2"
-    t.string   "assunto3"
+    t.string   "as"
+    t.string   "ass"
+    t.string   "assu"
     t.string   "resumo"
     t.string   "aquisicao"
     t.datetime "dataaquisicao"
@@ -121,7 +124,7 @@ ActiveRecord::Schema.define(:version => 20110927172215) do
     t.string   "titulo"
     t.string   "tipo"
     t.string   "formato"
-    t.string   "editora"
+    t.integer  "editora_id"
     t.datetime "data"
     t.string   "aquisicao"
     t.datetime "dataaquisicao"
