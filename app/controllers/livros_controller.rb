@@ -1,5 +1,6 @@
 class LivrosController < ApplicationController
   before_filter :load_areas
+  before_filter :load_unidades
   before_filter :load_identificacaos
 
   # GET /livros
@@ -31,6 +32,7 @@ class LivrosController < ApplicationController
     1.times do
       localizacao = @livro.localizacaos.build
     end
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @livro }
@@ -52,7 +54,7 @@ class LivrosController < ApplicationController
   # POST /livros.xml
   def create
     @livro = Livro.new(params[:livro])
-
+ 
     respond_to do |format|
       if @livro.save
         flash[:notice] = 'Livro was successfully created.'
@@ -102,6 +104,10 @@ protected
 
   def load_areas
       @areas = Area.find(:all, :order => 'area ASC')
+  end
+
+    def load_unidades
+      @unidades = Unidade.find(:all, :order => 'nome ASC')
   end
 
   def load_identificacaos

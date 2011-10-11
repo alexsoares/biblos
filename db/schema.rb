@@ -90,7 +90,6 @@ ActiveRecord::Schema.define(:version => 20111010173609) do
     t.integer  "identificacao_id"
     t.integer  "area_id"
     t.integer  "editora_id"
-    t.integer  "localizacao_id"
     t.string   "tomboS"
     t.string   "tomboL"
     t.string   "colecao"
@@ -105,6 +104,7 @@ ActiveRecord::Schema.define(:version => 20111010173609) do
 
   create_table "localizacaos", :force => true do |t|
     t.integer  "unidade_id"
+    t.integer  "livro_id"
     t.string   "localguardado"
     t.string   "aquisicao"
     t.datetime "dataaquisicao"
