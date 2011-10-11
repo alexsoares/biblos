@@ -38,7 +38,7 @@
              <td align="left" colspan="4" ><%= f.collection_select  :area_id, @areas, :id, :area, :include_blank => ' -- Selecione -- ' %>
            <tr>
                <td align="left" colspan="8">
-                  <% f.fields_for :localizacao do |builder| %>
+                  <% f.fields_for :localizacaos do |builder| %>
                       <%= render "dadoslocalizacao", :f => builder %>
                   <% end %>
                </td>
