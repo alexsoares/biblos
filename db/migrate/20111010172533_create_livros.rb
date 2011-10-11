@@ -5,7 +5,6 @@ class CreateLivros < ActiveRecord::Migration
       t.references :identificacao
       t.references :area
       t.references :editora
-      t.references :localizacao
       t.string :tomboS
       t.string :tomboL
       t.string :colecao
