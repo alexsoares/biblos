@@ -1,5 +1,4 @@
 class Editora < ActiveRecord::Base
-  has_many :isbns
   has_many :mapas
 
     validates_presence_of :nome, :message => ' - EDITORA EM BRANCO - '

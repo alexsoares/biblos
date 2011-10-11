@@ -13,11 +13,12 @@ class CreateRoles < ActiveRecord::Migration
 
     Role.create :name => "administrador"
     Role.create :name => "bibliotecario"
+    Role.create :name => "SEDUC"
     Role.create :name => "estagiario"
     Role.create :name => "usuario"
    
     RolesUser.create :role_id => 1, :user_id => 1
-
+    
   end
 
   def self.down

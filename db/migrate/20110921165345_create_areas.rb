@@ -1,7 +1,7 @@
 class CreateAreas < ActiveRecord::Migration
   def self.up
     create_table :areas do |t|
-      t.string :nome
+      t.string :area
 
       t.timestamps
     end

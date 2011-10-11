@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  codigo: MyString
+  titulo: MyString
+  subtitulo: MyString
+  autor: MyString
+  obs: MyString
+
+two:
+  codigo: MyString
+  titulo: MyString
+  subtitulo: MyString
+  autor: MyString
+  obs: MyString

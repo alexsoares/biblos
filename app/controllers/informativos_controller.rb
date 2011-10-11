@@ -82,4 +82,8 @@ class InformativosController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def regras
+    render :partial => 'regras'
+  end
 end

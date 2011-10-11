@@ -1,31 +1,27 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  tombo: MyString
-  midia: 
+  genero: 
+  localizacao: 
+  tomboS: MyString
+  tomboL: MyString
   titulo: MyString
-  colecao: MyString
+  subtitulo: MyString
   producao: MyString
-  generomidia: 
+  produtor: MyString
+  dataporducao: 2011-10-10 14:36:09
   localproducao: MyString
-  dataproducao: 2011-08-31 13:14:13
-  aquisicao: MyString
-  dataaquisicao: 2011-08-31 13:14:13
-  localguardado: MyString
-  unidade: 
   obs: MyString
 
 two:
-  tombo: MyString
-  midia: 
+  genero: 
+  localizacao: 
+  tomboS: MyString
+  tomboL: MyString
   titulo: MyString
-  colecao: MyString
+  subtitulo: MyString
   producao: MyString
-  generomidia: 
+  produtor: MyString
+  dataporducao: 2011-10-10 14:36:09
   localproducao: MyString
-  dataproducao: 2011-08-31 13:14:13
-  aquisicao: MyString
-  dataaquisicao: 2011-08-31 13:14:13
-  localguardado: MyString
-  unidade: 
   obs: MyString

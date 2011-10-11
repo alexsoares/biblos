@@ -1,0 +1,28 @@
+<h1>Listing localizacaos</h1>
+
+<table>
+  <tr>
+    <th>Unidade</th>
+    <th>Localguardado</th>
+    <th>Aquisicao</th>
+    <th>Dataaquisicao</th>
+    <th>Obs</th>
+  </tr>
+
+<% @localizacaos.each do |localizacao| %>
+  <tr>
+    <td><%=h localizacao.unidade %></td>
+    <td><%=h localizacao.localguardado %></td>
+    <td><%=h localizacao.aquisicao %></td>
+    <td><%=h localizacao.dataaquisicao %></td>
+    <td><%=h localizacao.obs %></td>
+    <td><%= link_to 'Show', localizacao %></td>
+    <td><%= link_to 'Edit', edit_localizacao_path(localizacao) %></td>
+    <td><%= link_to 'Destroy', localizacao, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New localizacao', new_localizacao_path %>

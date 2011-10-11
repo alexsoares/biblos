@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  unidade: 
+  localguardado: MyString
+  aquisicao: MyString
+  dataaquisicao: 2011-10-10 14:19:54
+  obs: MyString
+
+two:
+  unidade: 
+  localguardado: MyString
+  aquisicao: MyString
+  dataaquisicao: 2011-10-10 14:19:54
+  obs: MyString

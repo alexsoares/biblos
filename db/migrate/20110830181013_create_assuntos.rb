@@ -1,7 +1,7 @@
 class CreateAssuntos < ActiveRecord::Migration
   def self.up
     create_table :assuntos do |t|
-      t.string :nome
+      t.string :assunto
 
       t.timestamps
     end

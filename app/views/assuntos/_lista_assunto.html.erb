@@ -7,7 +7,7 @@
   </tr>
   <% for assunto in @assunto %>
   <tr>
-    <td><font size="2"><%=h assunto.nome %></font></td>
+    <td><font size="2"><%=h assunto.assunto %></font></td>
       <div class="botao">
         <% if current_user.has_role?('administrador')%>
            <td align="right"><%= button_to('Excluir',{:action => "destroy", :id =>assunto}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>

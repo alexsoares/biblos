@@ -1,0 +1,50 @@
+<br/><br/>
+<% form_for(@identificacao) do |f| %>
+<%= f.error_messages %>
+<font  size="2">
+ <table class="tabelas" width="70%" align="center">
+  <tr>
+   <td colspan="2" align="left">
+     <font  size=5><b> CADASTRO CÓDIGO IDENTIFICADOR</b></font>
+   </td>
+  </tr>
+  <tr>
+    <td>
+      <fieldset><legend><font  size=4> ACERVO</font></legend>
+        <table >
+            <tr>
+              <td align="left"><b>Código:</b></td>
+              <td align="left" colspan="3"><%= f.text_field :codigo, :size =>15 %>
+           </tr>
+           <tr>
+               <td align="left"><b> Título:</b></td>
+               <td align="left"><%= f.text_field :titulo, :size =>50 %></td>
+           </tr>
+           <tr>
+               <td align="left"><b> Subtítulo:</b></td>
+               <td align="left"><%= f.text_field :subtitulo, :size =>50 %></td>
+           </tr>
+           <tr>
+               <td align="left"><b> Autor:</b></td>
+               <td><%= f.text_field :autor, :size =>50 %>
+                    <font color="red"><b> <u>OBS:</u> Caso haja mais de um autor separar com / </b></font></td>
+           </tr>
+            <tr >
+               <td align="left" valign="top"><b>Observações:</b></td>
+               <td align="left" colspan="7  "><%= f.text_area(:obs, :cols =>"65", :rows => "2") %></td>
+            </tr>
+       </table>
+      </fieldset>
+      <table>
+          <tr>
+            <div id='Certeza'>
+               <td align="left" width="8%"><%= f.submit "Salvar" %></td>
+            </div>
+            <% end %>
+              <td align="left" ><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+          </tr>
+      </table>
+ </table>
+</font>
+
+

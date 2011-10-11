@@ -1,0 +1,20 @@
+<h1>Editing assuntoiten</h1>
+
+<% form_for(@assuntoiten) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :assunto_id %><br />
+    <%= f.text_field :assunto_id %>
+  </p>
+  <p>
+    <%= f.label :assunto %><br />
+    <%= f.text_field :assunto %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @assuntoiten %> |
+<%= link_to 'Back', assuntoitens_path %>

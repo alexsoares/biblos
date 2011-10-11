@@ -1,0 +1,90 @@
+<br/>
+<% form_for(@livro) do |f| %>
+<%= f.error_messages %>
+<font  size="2">
+ <table class="tabelas" width="70%" align="center">
+  <tr>
+   <td colspan="2" align="left">
+     <font  size=5><b> CADASTRO DE LIVROS</b></font>
+   </td>
+  </tr>
+  <tr>
+    <td>
+      <fieldset><legend><font  size=4> Livros</font></legend>
+        <table>
+          <tr>
+            <td align="left" colspan="8">
+            <font color="red"> <b> <u>OBSERVAÇÕES:</u></b></font>
+              <font color="red">Selecionar o n° do <b>CÓDIGO</b> para vizualizar o TITULO e outros dados já cadastrados do exemplar.</font>
+           </td>
+          </tr>
+          <tr>
+              <td align="left" width="10%"><b>Tombo(Local): </b></td>
+              <td align="left" colspan="2"><%= f.text_field :tomboL, :size =>10 %></td>
+          </tr>
+          <tr>
+              <td align="left"><b>Código:</b></td>
+              <td align="left" colspan="2"><%= f.collection_select  :identificacao_id, @identificacaos, :id, :codigo, :include_blank => ' -- Selecione -- ' %></td>
+                   <%= observe_field 'livro_identificacao_id',
+                       :update => "dados_codigo",
+                       :url    => { :action => 'identificador' },
+                       :with   => 'livro_identificacao_id' %>
+           </tr>
+           <tr>
+             <td  colspan="5"> <div id="dados_codigo"></div></td>
+           </tr>
+           <tr>
+             <td align="left"><b> Área:</b></td>
+             <td align="left" colspan="4" ><%= f.collection_select  :area_id, @areas, :id, :area, :include_blank => ' -- Selecione -- ' %>
+           <tr>
+               <td align="left" colspan="8">
+                  <% f.fields_for :localizacao do |builder| %>
+                      <%= render "dadoslocalizacao", :f => builder %>
+                  <% end %>
+               </td>
+           </tr>
+           <tr>
+               <td align="left"><b> Coleção:
+               <td align="left" ></b><%= f.text_field :colecao %></td>
+           </tr>
+           <tr>
+              <td align="left"><b> Edição:</b></td>
+              <td align="left" colspan="8"><%= f.text_field :edicao , :size=> 1%><b>°</b>
+                               <b> Data Edição:</b><%= f.date_select(:dataedicao, :order => [:day, :month, :year], :start_year => (Date.today.year)-50) %></td>
+          </tr>
+          <tr>
+              <td align="left"><b> Local Edição:</b></td>
+              <td align="left"  colspan="8"><%= f.text_field :localedicao %>
+              </td
+           </tr>
+            <tr >
+               <td align="left" valign="top"><b>Resumo:</b></td>
+               <td align="left" colspan="8  "><%= f.text_area(:resumo, :cols =>"55", :rows => "2") %></td>
+            </tr>
+            <tr >
+               <td align="left" valign="top"><b>Observações:</b></td>
+               <td align="left" colspan="8  "><%= f.text_area(:obs, :cols =>"55", :rows => "2") %></td>
+            </tr>
+            <tr >
+               <td align="left" valign="top"><b>Assuntos:</b></td>
+               <td align="left" colspan="8  ">
+
+
+
+               </td>
+            </tr>
+       </table>
+      </fieldset>
+      <table>
+          <tr>
+            <div id='Certeza'>
+               <td align="left" width="8%"><%= f.submit "Salvar" %></td>
+            </div>
+            <% end %>
+            <td align="left" ><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+          </tr>
+      </table>
+    </td>
+   </tr>
+ </table>
+</font>

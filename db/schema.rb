@@ -9,34 +9,37 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110927172215) do
+ActiveRecord::Schema.define(:version => 20111010173609) do
 
   create_table "areas", :force => true do |t|
-    t.string   "nome"
+    t.string   "area"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "assuntoitens", :force => true do |t|
+    t.integer  "assunto_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "assuntos", :force => true do |t|
-    t.string   "nome"
+    t.string   "assunto"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "audiovisuais", :force => true do |t|
-    t.string   "tombo"
-    t.string   "tipo"
+    t.integer  "genero_id"
+    t.integer  "localizacao_id"
+    t.string   "tomboS"
+    t.string   "tomboL"
     t.string   "titulo"
     t.string   "subtitulo"
-    t.string   "colecao"
     t.string   "producao"
-    t.integer  "generomidia_id"
+    t.string   "produtor"
+    t.datetime "dataporducao"
     t.string   "localproducao"
-    t.datetime "dataproducao"
-    t.string   "aquisicao"
-    t.datetime "dataaquisicao"
-    t.string   "localguardado"
-    t.integer  "unidade_id",     :null => false
     t.string   "obs"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -64,6 +67,16 @@ ActiveRecord::Schema.define(:version => 20110927172215) do
     t.datetime "updated_at"
   end
 
+  create_table "identificacaos", :force => true do |t|
+    t.string   "codigo"
+    t.string   "titulo"
+    t.string   "subtitulo"
+    t.string   "autor"
+    t.string   "obs"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "informativos", :force => true do |t|
     t.text     "mensagem"
     t.datetime "starts_at"
@@ -72,64 +85,29 @@ ActiveRecord::Schema.define(:version => 20110927172215) do
     t.datetime "updated_at"
   end
 
-  create_table "isbns", :force => true do |t|
-    t.string   "nisbn"
-    t.string   "titulo"
-    t.string   "subtitulo"
+  create_table "livros", :force => true do |t|
+    t.integer  "assuntoiten_id"
+    t.integer  "identificacao_id"
+    t.integer  "area_id"
+    t.integer  "editora_id"
+    t.integer  "localizacao_id"
+    t.string   "tomboS"
+    t.string   "tomboL"
     t.string   "colecao"
     t.string   "edicao"
-    t.integer  "editora_id"
-    t.string   "localedicao"
-    t.string   "autor"
-    t.string   "obs"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "jogos", :force => true do |t|
-    t.string   "tombo"
-    t.string   "nome"
-    t.string   "faixaetaria"
-    t.string   "fabricante"
-    t.string   "descricao"
-    t.string   "aquisicao"
-    t.datetime "dataaquisicao"
-    t.string   "localguardado"
-    t.integer  "unidade_id"
-    t.string   "obs"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "livros", :force => true do |t|
-    t.string   "tombo"
-    t.integer  "isbn_id"
     t.datetime "dataedicao"
-    t.integer  "area_id"
-    t.string   "as"
-    t.string   "ass"
-    t.string   "assu"
+    t.string   "localedicao"
     t.string   "resumo"
-    t.string   "aquisicao"
-    t.datetime "dataaquisicao"
-    t.string   "localguardado"
-    t.integer  "unidade_id"
     t.string   "obs"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "mapas", :force => true do |t|
-    t.string   "tombo"
-    t.string   "titulo"
-    t.string   "tipo"
-    t.string   "formato"
-    t.integer  "editora_id"
-    t.datetime "data"
+  create_table "localizacaos", :force => true do |t|
+    t.integer  "unidade_id"
+    t.string   "localguardado"
     t.string   "aquisicao"
     t.datetime "dataaquisicao"
-    t.string   "localguardado"
-    t.integer  "unidade_id"
     t.string   "obs"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -143,25 +121,6 @@ ActiveRecord::Schema.define(:version => 20110927172215) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "chat_session"
-  end
-
-  create_table "periodicos", :force => true do |t|
-    t.string   "tombo"
-    t.string   "titulo"
-    t.string   "tipo"
-    t.string   "colecao"
-    t.string   "producao"
-    t.string   "periodicidade"
-    t.integer  "issn"
-    t.string   "localproducao"
-    t.datetime "dataproducao"
-    t.string   "aquisicao"
-    t.datetime "dataaquisicao"
-    t.string   "localguardado"
-    t.integer  "unidade_id"
-    t.string   "obs"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "roles", :force => true do |t|

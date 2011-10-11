@@ -1,0 +1,47 @@
+<br/>
+<font size="2">
+<table  class="tabelas" width="60%"align="center">
+   <tr>
+      <td colspan="2" align="left">
+         <font  size=5 color="black"> <b>IDENTIFICADOR</b></font>
+      </td>
+  </tr>
+  <tr>
+   <td>
+     <fieldset><legend><font  size=4> Dados Identificação</font></legend>
+      <table>
+        <tr>
+          <td align="left"><b>CÓDIGO:</b></td>
+          <td align="left">   <%=h @identificacao.codigo %>
+       </tr>
+       <tr>
+         <td align="left"><b>Título:</b></td>
+         <td align="left"><%=h @identificacao.titulo %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> Autor:</b></td>
+         <td align="left">   <%=h @identificacao.autor%></td>
+       </tr>
+       <tr>
+         <td valign="top" align="left"><b>Observações:</b></td>
+         <td align="left">  <%=h @identificacao.obs %></td>
+      </tr>
+    </table>
+    </fieldset>
+     <div class="botao">
+      <table>
+        <tr>
+          <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+           <% if current_user.has_role?('administrador')  %>
+             <td align="left" width="8%"> <%= button_to('Editar', {:action => "edit", :id => @isbn}, :method => "get") %></td>
+           <%end%>
+          <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+        </tr>
+      </table>
+     </div>
+   </td>
+  </tr>
+ </table>
+</font>
+<br/>
+

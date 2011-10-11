@@ -17,11 +17,11 @@
          <table>
            <tr>
              <td width="20%"align="left" colspan="3"><b>Assunto:</b>
-                 <%= f.text_field :nome %>
+                 <%= f.text_field :assunto %>
                    <%= observe_field 'assunto_nome',
                       :frequency => 0.1,
                       :update => "cadastrados",
-                      :with => :assunto_nome,
+                      :with => :assunto_assunto,
                      :url => { :action => 'lista' } %>
             </td>
           </tr>

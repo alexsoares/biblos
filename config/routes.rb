@@ -1,15 +1,22 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :audiovisuais
+
+  map.resources :audiovisuais
+
   map.resources :livros
-  map.resources :isbns
+
+  map.resources :localizacaos
+
+  map.resources :identificacaos
+
+  map.resources :assuntoitens
+
   map.resources :editoras
   map.resources :areas
-  map.resources :jogos
-  map.resources :mapas
-  map.resources :periodicos
-  map.resources :audiovisuais
   map.resources :generomidias
   map.resources :assuntos
   map.resources :tipos
+
   map.resources :informativos
   map.resources :unidades, :collection => {:print_all => :get}
   map.resources :users

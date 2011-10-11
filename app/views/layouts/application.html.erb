@@ -121,10 +121,12 @@ display: none;
                         <li><%= link_to "Assuntos",new_assunto_path %></li>
                          <li><%= link_to "Editoras",new_editora_path %></li>
                         <li><%= link_to "Gênero Midia",new_generomidia_path %></li>
-                        <li><a>ISBN</a>
+                        <li><a>Identificador</a>
                            <ul>
-                              <li><%= link_to "Cadastrar",new_isbn_path %></li>
-                              <li><%= link_to "Consultar",isbns_path %></li>
+                             <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+                                 <li id="about"><%= link_to_remote('Cadastrar', :update => 'conteudo',:url => { :action => "regras", :controller => 'identificacaos'}) %></li>
+                             <%end%>
+                              <li><%= link_to "Consultar", identificacaos_path %></li>
                            </ul>
                         </li>
                         <li><%= link_to "Tipo Unidade",new_tipo_path %></li>
@@ -154,7 +156,7 @@ display: none;
                            <li><%= link_to('por Gênero', cons_genero_av_path) %></li>
                            <li><%= link_to('por Título', cons_titulo_av_path) %></li>
                            <li><%= link_to('por Unidade', cons_unidade_av_path) %></li>
-                           <li><%= link_to('Todos', audiovisuais_path)%></li>
+                           <li><%= link_to('Todos')%></li>
                          </ul>
                       </li>
                     </ul>
@@ -169,7 +171,7 @@ display: none;
                            <li><%= link_to('por Faixa Etária',cons_faixaetaria_jogo_path) %></li>
                            <li><%= link_to('por Título',cons_titulo_jogo_path) %></li>
                            <li><%= link_to('por Unidade', cons_unidade_jogo_path) %></li>
-                           <li><%= link_to('Todos', jogos_path)%></li>
+                           <li><%= link_to('Todos')%></li>
                          </ul>
                        </li>
                      </ul>
@@ -177,7 +179,7 @@ display: none;
                    <li><a>Livros</a>
                      <ul>
                        <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
-                         <li><%= link_to "Cadastrar",new_livro_path %></li>
+                         <li id="about"><%= link_to_remote('Cadastrar', :update => 'conteudo',:url => { :action => "regras", :controller => 'livros'}) %></li>
                        <%end%>
                        <li><a>Consultar</a>
                          <ul>
@@ -186,7 +188,7 @@ display: none;
                            <li><%= link_to('por ISBN',cons_isbn_livro_path) %></li>
                            <li><%= link_to('por Título',cons_titulo_livro_path) %></li>
                            <li><%= link_to('por Unidade', cons_unidade_livro_path) %></li>
-                           <li><%= link_to('Todos', livros_path)%></li>
+                           <li><%= link_to('Todos')%></li>
                          </ul>
                        </li>
                      </ul>
@@ -201,7 +203,7 @@ display: none;
                            <li><%= link_to('por Tipo',cons_tipo_mapa_path) %></li>
                            <li><%= link_to('por Título',cons_titulo_mapa_path) %></li>
                            <li><%= link_to('por Unidade', cons_unidade_mapa_path) %></li>
-                           <li><%= link_to('Todos', mapas_path)%></li>
+                           <li><%= link_to('Todos')%></li>
                          </ul>
                        </li>
                      </ul>
@@ -217,16 +219,17 @@ display: none;
                            <li><%= link_to('por Tipo',cons_tipo_pe_path) %></li>
                            <li><%= link_to('por Título',cons_titulo_pe_path) %></li>
                            <li><%= link_to('por Unidade', cons_unidade_pe_path) %></li>
-                           <li><%= link_to('Todos', periodicos_path)%></li>
+                           <li><%= link_to('Todos')%></li>
                          </ul>
                        </li>
                      </ul>
                    </li>
                </ul>
-             </li>
+             </li
+
               <li><a class="item-primary" href="#;">Informativos</a>
                  <ul style="width:108px;">
-                  <li id="about"><%= link_to_remote('Normas e Regras', :update => 'conteudo',:url => { :action => "regras", :controller => 'livros'}) %></li>
+                  <li id="about"><%= link_to_remote('Normas e Regras', :update => 'conteudo',:url => { :action => "regras", :controller => 'informativos'}) %></li>
                   
                      <li><a>Informativo</a>
                          <ul>

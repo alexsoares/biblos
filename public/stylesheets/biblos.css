@@ -90,8 +90,6 @@ margin:25px;
    
 }
 
-
-
 #imagem_login{
    background-image:url(Imagens/livros.jpg);
    background-repeat: no-repeat;
@@ -360,7 +358,6 @@ border-right: double;
 }
 
 
-
 #accordion {
 
     float:left;
@@ -380,16 +377,13 @@ border-right: double;
     margin:0;
 }
 
-
-
-
-/*^'^ Navigation Structure ^'^*/
 .nav-container-outer{
 background: #990000;
 padding: 0px;
 height: 74px;
 background: url(images/nav-bg.jpg);
 }
+
 .float-left{
 float: left;
 }
@@ -555,3 +549,5 @@ height:15px;
 margin:2px 2px 0px 2px;
 border-color:#AAAAAA;
 }
+
+

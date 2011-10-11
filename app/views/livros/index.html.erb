@@ -1,103 +1,44 @@
-<br/>
- <table  class="tabelas"   align="center" width="100%">
-   <tr>
-      <td align="left">
-         <font  size=5><b> ACERVO LIVROS</b></font>
-      </td>
-   </tr>
-   <tr>
-     <td colspan="2">
-        <br/>
-        <div class="botao">
-        <table width="100%" align="center">
-          <tr>
-             <td width="6%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
-             <td width="6%" align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
-             <td align="right" width="25%" >
-                 <font color ="red "size="2">
-                    <b> Total:<%= @livros.count %></b>
-                  </font>
-             </td>
-             <td align="right">
-               <div class="botao">
-                <table>
-                  <tr>
-                    <% form_tag livros_path, :method => 'get' do %>
-                     <td align="right"><font size="4"> Digitar Titulo:</font>
-                       <%= text_field_tag :search, params[:search] %>
-                       <%= submit_tag "Filtrar", :titulo => nil %>
-                     </td>
-                    <% end %>
-                  </tr>
-                </table>
-                </div>
-             </td>
-         </tr>
-         <tr>
-           <% if  $var == 0 then %>
-             <td align="left" colspan="4"><%= will_paginate @livros %></td>
-           <%end%>
-         </tr>
-       </table>
-       <br/>
-       </div>
-       <font  size="2">
-       <table border="2" width="100%">
-          <tr>
-            <th>Tombo (SEDUC)</th>
-            <th>Tombo (Local)</th>
-            <th>Título</th>
-            <th>Autor</th>
-            <th>Area</th>
-            <th>Assunto1</th>
-            <th>Assunto2</th>
-            <th>Assunto3</th>
-            <th>Localização</th>
-            <th>Unidade</th>
-          </tr>
-         <% @livros.each do |livro| %>
-          <tr>
-            <td align="center"><%=h livro.id %></td>
-            <td align="center"><%=h livro.tombo %></td>
-            <td><%=h livro.isbn.titulo %></td>
-            <td><%=h livro.isbn.autor %></td>
-            <td><%=h livro.area.nome %></td>
-            <td><%=h livro.assunto1%></td>
-            <td><%=h livro.assunto2%></td>
-            <td><%=h livro.assunto3%></td>
-            <td><%=h livro.localguardado%></td>
-            <td><%=h livro.unidade.nome %></td>
+<h1>Listing livros</h1>
 
-        </tr>
-      <tr>
-         <td colspan="12">
-           <div class="botao">
-            <table >
-             <td><%= button_to('Exibir',{:action => "show", :id =>livro}, :method => "get") %></td>
-               <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
-                  <td> <%= button_to('Editar',{:action => "edit", :id =>livro}, :method => "get") %></td>
-                     <% if current_user.has_role?('administrador')%>
-                       <td><%= button_to('Excluir',{:action => "destroy", :id =>livro}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
-                     <%end%>
-               <%end%>
-             </table>
-           </div>
-           </td>
-        </tr>
-        <% end %>
-       </table>
-       <div class="botao">
-         <table width="100%" align="left">
-          <br/>
-          <tr>
-              <td width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
-              <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
-              <% if  $var == 0 then %>
-                 <td align="left" colspan="3"><%= will_paginate @audiovisuais %></td>
-              <%end%>
+<table>
+  <tr>
+    <th>Assuntoiten</th>
+    <th>Identificacao</th>
+    <th>Area</th>
+    <th>Editora</th>
+    <th>Localizacao</th>
+    <th>Tombos</th>
+    <th>Tombol</th>
+    <th>Colecao</th>
+    <th>Edicao</th>
+    <th>Dataedicao</th>
+    <th>Localedicao</th>
+    <th>Resumo</th>
+    <th>Obs</th>
+  </tr>
 
-        </table>
-        </div>
-     </font>
-  </table>
-<br/>
+<% @livros.each do |livro| %>
+  <tr>
+    <td><%=h livro.assuntoiten %></td>
+    <td><%=h livro.identificacao %></td>
+    <td><%=h livro.area %></td>
+    <td><%=h livro.editora %></td>
+    <td><%=h livro.localizacao %></td>
+    <td><%=h livro.tomboS %></td>
+    <td><%=h livro.tomboL %></td>
+    <td><%=h livro.colecao %></td>
+    <td><%=h livro.edicao %></td>
+    <td><%=h livro.dataedicao %></td>
+    <td><%=h livro.localedicao %></td>
+    <td><%=h livro.resumo %></td>
+    <td><%=h livro.obs %></td>
+    <td><%= link_to 'Show', livro %></td>
+    <td><%= link_to 'Edit', edit_livro_path(livro) %></td>
+    <td><%= link_to 'Destroy', livro, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New livro', new_livro_path %>

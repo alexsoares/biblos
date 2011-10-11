@@ -1,114 +1,68 @@
-<br/>
-<font size="2">
-<table  class="tabelas" width="60%"align="center">
-   <tr>
-      <td colspan="2" align="left">
-         <font  size=5 color="black"> <b>LIVROS</b></font>
-      </td>
-  </tr>
-  <tr>
-   <td>
-     <fieldset><legend><font  size=4> Dados</font></legend>
-      <table>
-        <tr>
-           <td align="left"><b>Tombo (SEDCUC):</b></td>
-           <td align="left">  <%=h @livro.id %></td>
-        </tr>
-        <tr>
-           <td align="left"><b>Tombo (Local):</b></td>
-           <td align="left">  <%=h @livro.tombo %></td>
-        </tr>
-        <tr>
-          <td align="left"><b>ISNB:</b></td>
-          <td align="left">   <%=h @livro.isbn.nisbn %>
-       </tr>
-       <tr>
-         <td align="left"><b>Título:</b></td>
-         <td align="left"><%=h @livro.isbn.titulo %></td>
-       </tr>
-       <tr>
-         <td align="left"><b> Coleção:</b></td>
-         <td align="left">  <%=h @livro.isbn.colecao%></td>
-       </tr>
-       <tr>
-         <td align="left"><b>Edição:</b></td>
-         <td align="left">  <%=h @livro.isbn.edicao %></td>
-       </tr>
-       <tr>
-         <td align="left"><b>Data Edição:</b></td>
-         <td align="left">  <%=h @livro.dataedicao.strftime("%Y") %></td><p>
-       </tr>
-       <tr>
-         <td align="left"><b>Editora:</b></td>
-         <td align="left">   <%=h @livro.isbn.editora.nome %></td>
-       </tr>
-       <tr>
-         <td align="left"><b>Local Edição:</b></td>
-         <td align="left">  <%=h @livro.isbn.localedicao %></td>
-       </tr>
-       <tr>
-         <td align="left"><b> Autor:</b></td>
-         <td align="left">   <%=h @livro.isbn.autor%></td>
-       </tr>
-       <tr>
-         <td align="left"><b> Área:</b></td>
-         <td align="left">   <%=h @livro.area.nome %></td>
-       </tr>
-      <tr>
-         <td align="left"><b> Assunto1:</b></td>
-         <td align="left">   <%=h @livro.assunto1%></td>
-       </tr>
-       <tr>
-         <td align="left"><b>Assunto2:</b></td>
-         <td align="left">   <%=h @livro.assunto2%></td>
-       </tr>
-       <tr>
-         <td align="left"><b>Assunto3:</b></td>
-         <td align="left">   <%=h @livro.assunto3%></td>
-       </tr>
-       <tr>
-         <td align="left"><b>Resumo:</b></td>
-         <td align="left">   <%=h @livro.resumo %></td>
-       </tr>
+<p>
+  <b>Assuntoiten:</b>
+  <%=h @livro.assuntoiten %>
+</p>
+
+<p>
+  <b>Identificacao:</b>
+  <%=h @livro.identificacao %>
+</p>
+
+<p>
+  <b>Area:</b>
+  <%=h @livro.area %>
+</p>
+
+<p>
+  <b>Editora:</b>
+  <%=h @livro.editora %>
+</p>
+
+<p>
+  <b>Localizacao:</b>
+  <%=h @livro.localizacao %>
+</p>
+
+<p>
+  <b>Tombos:</b>
+  <%=h @livro.tomboS %>
+</p>
+
+<p>
+  <b>Tombol:</b>
+  <%=h @livro.tomboL %>
+</p>
+
+<p>
+  <b>Colecao:</b>
+  <%=h @livro.colecao %>
+</p>
+
+<p>
+  <b>Edicao:</b>
+  <%=h @livro.edicao %>
+</p>
+
+<p>
+  <b>Dataedicao:</b>
+  <%=h @livro.dataedicao %>
+</p>
+
+<p>
+  <b>Localedicao:</b>
+  <%=h @livro.localedicao %>
+</p>
+
+<p>
+  <b>Resumo:</b>
+  <%=h @livro.resumo %>
+</p>
+
+<p>
+  <b>Obs:</b>
+  <%=h @livro.obs %>
+</p>
 
 
-       <tr>
-         <td align="left"><b>Forma Aquisição:</b></td>
-         <td align="left"><%=h @livro.aquisicao %></td>
-       </tr>
-       <tr>
-         <td align="left"><b> Data Aquisição:</b></td>
-         <td align="left">  <%=h @livro.dataaquisicao.strftime("%d de %B de %Y") %></td><p>
-       </tr>
-       <tr>
-         <td align="left"><b>Localização:</b></td>
-         <td align="left">  <%=h @livro.localguardado%></td><p>
-       </tr>
-      <tr>
-         <td align="left"><b>Unidade:</b></td>
-         <td align="left">   <%=h @livro.unidade.nome %></td>
-      </tr>
-      <tr>
-         <td valign="top" align="left"><b>Observações:</b></td>
-         <td align="left">  <%=h @livro.obs %></td>
-      </tr>
-    </table>
-    </fieldset>
-     <div class="botao">
-      <table>
-        <tr>
-          <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
-           <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
-             <td align="left" width="8%"> <%= button_to('Editar', {:action => "edit", :id => @livro}, :method => "get") %></td>
-           <%end%>
-          <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
-        </tr>
-      </table>
-     </div>
-   </td>
-  </tr>
- </table>
-</font>
-<br/>
-
-
+<%= link_to 'Edit', edit_livro_path(@livro) %> |
+<%= link_to 'Back', livros_path %>
