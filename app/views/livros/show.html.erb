@@ -12,7 +12,7 @@
       <table>
         <tr>
            <td align="left"><b>Tombo (SEDCUC):</b></td>
-           <td align="left">  <%=h @livro.tomboS %></td>
+           <td align="left">LV<%=h @livro.id %></td>
         </tr>
         <tr>
            <td align="left"><b>Tombo (Local):</b></td>
@@ -44,7 +44,7 @@
        </tr>
        <tr>
          <td align="left"><b>Editora:</b></td>
-         <td align="left">   </td>
+         <td align="left"><%=h @livro.editora.nome %>   </td>
        </tr>
        <tr>
          <td align="left"><b>Local Edição:</b></td>
@@ -59,8 +59,12 @@
          <td align="left">   <%=h @livro.area.area %></td>
        </tr>
       <tr>
-         <td align="left"><b> Assuntos:</b></td>
-         <td align="left">   </td>
+         <td align="left" valign="top"><b> Assuntos:</b></td>
+         <td align="left">
+          <% @livro.assuntos.each do |p| %>
+            <%= p.assunto%><br/>
+          <%end%>
+         </td>
        </tr>
        <tr>
          <td align="left"><b>Resumo:</b></td>
@@ -70,19 +74,33 @@
 
        <tr>
          <td align="left"><b>Forma Aquisição:</b></td>
-         <td align="left"></td>
+         <td align="left">
+           <% @livro.localizacaos.each do |p| %>
+            <%= p.aquisicao%>
+          <%end%>
+         </td>
        </tr>
        <tr>
          <td align="left"><b> Data Aquisição:</b></td>
-         <td align="left"> </td><p>
+         <td align="left"> 
+          <% @livro.localizacaos.each do |p| %>
+            <%= p.dataaquisicao.strftime("%d/%m/%Y")%>
+          <%end%>
+         </td>
        </tr>
        <tr>
          <td align="left"><b>Localização:</b></td>
-         <td align="left">  </td><p>
+         <td align="left">
+          <% @livro.localizacaos.each do |p| %>
+            <%= p.localguardado%>
+          <%end%>
+          </td>
        </tr>
       <tr>
          <td align="left"><b>Unidade:</b></td>
-         <td align="left">  </td>
+         <td align="left"><% @livro.localizacaos.each do |p| %>
+            <%= p.unidade.nome%>
+          <%end%>  </td>
       </tr>
       <tr>
          <td valign="top" align="left"><b>Observações:</b></td>

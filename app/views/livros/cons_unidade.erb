@@ -22,12 +22,12 @@
                 <fieldset><legend><font  size="3">Consulta por</font></legend>
                  <table>
                    <tr>
-                    <td align="left" colspan="2" ><font  size="3" color="black"> Título: <%= collection_select :livro, :isbn_id,  @titulolivros, :id, :titulo, :include_blank => ' -- Selecione -- '  %></font></td>
+                    <td align="left" colspan="2" ><font  size="3" color="black"> Título:</font></td>
                   </tr>
                   <tr>
-                    <td align="left"><font  size="3" color="black"> Área: <%= collection_select :livro, :area_id, @arealivros, :id, :nome, :include_blank => ' -- Selecione -- '  %></font></td>
-                    <td align="left"><font  size="3" color="black"> Assunto: <%= collection_select :assunto, :nome,   @assuntos, :nome, :nome, :include_blank => ' -- Selecione -- '  %></font></td>
-                    <td align="left"><font  size="3" color="black"> Autor: <%= collection_select :isbn,  :autor,  @autorlivros, :autor, :autor, :include_blank => ' -- Selecione --'  %></font></td>
+                    <td align="left"><font  size="3" color="black"> Área: <%= collection_select :livro,:area_id, @areas, :id, :area, :include_blank => ' -- Selecione -- '  %></font></td>
+                    <td align="left"><font  size="3" color="black"> Assunto:</font></td>
+
                   </tr>
                  </table>
                </fieldset>

@@ -36,6 +36,11 @@
            <tr>
              <td align="left"><b> Área:</b></td>
              <td align="left" colspan="4" ><%= f.collection_select  :area_id, @areas, :id, :area, :include_blank => ' -- Selecione -- ' %>
+           </tr>
+           <tr>
+             <td align="left"><b> editora:</b></td>
+             <td align="left" colspan="4" ><%= f.collection_select  :editora_id, @editoras, :id, :nome, :include_blank => ' -- Selecione -- ' %>
+           </tr>
            <tr>
                <td align="left" colspan="8">
                   <% f.fields_for :localizacaos do |builder| %>
@@ -66,11 +71,21 @@
                <td align="left" colspan="8  "><%= f.text_area(:obs, :cols =>"55", :rows => "2") %></td>
             </tr>
             <tr >
-               <td align="left" valign="top"><b>Assuntos:</b></td>
-               <td align="left" colspan="8  ">
+              <td lign="left" colspan="8  ">
+                <fieldset><legend><font  size=3> <b>Assuntos:</b></font></legend>
+                   <table>
+                     <tr>
+                       <% f.fields_for :assuntos do |builder| %>
+                          <%= render "assuntos", :f => builder %>
+                       <% end %>
+                     </tr>
+                     <tr valign="bottom">
+                       <td valign="bottom"align="left"><%= link_to_add_fields "Adiciona Assunto", f, :assuntos %></td>
+                     </tr>
 
+                   </table>
 
-
+                </fieldset>
                </td>
             </tr>
        </table>

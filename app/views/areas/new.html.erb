@@ -17,11 +17,11 @@
          <table>
            <tr>
              <td width="20%"align="left" colspan="3"><b>Área:</b>
-                 <%= f.text_field :nome %>
-                   <%= observe_field 'area_nome',
+                 <%= f.text_field :area %>
+                   <%= observe_field 'area_area',
                       :frequency => 0.1,
                       :update => "cadastrados",
-                      :with => :area_nome,
+                      :with => :area_area,
                      :url => { :action => 'lista' } %>
             </td>
           </tr>

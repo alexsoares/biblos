@@ -15,7 +15,7 @@
             <table>
               <tr>
                 <td>
-                   <font  size="4" color="black"> Área: <%= collection_select :livro,:area_id, @arealivros, :id, :nome, :include_blank => ' -- Selecione -- '  %></font>
+                   <font  size="4" color="black"> Área: <%= collection_select :livro,:area_id, @areas, :id, :area, :include_blank => ' -- Selecione -- '  %></font>
                  </td>
               </tr>
            </table>

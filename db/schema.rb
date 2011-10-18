@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111010173609) do
+ActiveRecord::Schema.define(:version => 20111017175142) do
 
   create_table "areas", :force => true do |t|
     t.string   "area"
@@ -17,14 +17,9 @@ ActiveRecord::Schema.define(:version => 20111010173609) do
     t.datetime "updated_at"
   end
 
-  create_table "assuntoitens", :force => true do |t|
-    t.integer  "assunto_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "assuntos", :force => true do |t|
     t.string   "assunto"
+    t.integer  "livro_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -86,7 +81,6 @@ ActiveRecord::Schema.define(:version => 20111010173609) do
   end
 
   create_table "livros", :force => true do |t|
-    t.integer  "assuntoiten_id"
     t.integer  "identificacao_id"
     t.integer  "area_id"
     t.integer  "editora_id"
@@ -100,6 +94,11 @@ ActiveRecord::Schema.define(:version => 20111010173609) do
     t.string   "obs"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "livros_unidades", :id => false, :force => true do |t|
+    t.integer "livro_id",   :null => false
+    t.integer "unidade_id", :null => false
   end
 
   create_table "localizacaos", :force => true do |t|

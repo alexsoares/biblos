@@ -8,39 +8,40 @@
             </td>
          </tr>
          <% @livros.each do |livro| %>
-         <tr>
-            <th>Título</th>
-            <th>Autor</th>
-            <th>Tombo (SEDUC)</th>
-            <th>Tombo (Local)</th>
-            <th>ISBN</th>
-            <th>Coleção</th>
-            <th>Area</th>
+          <tr>
+             <th>Título</th>
+             <td colspan="7"><%=h livro.identificacao.titulo %></td>
+          </tr>
+          <tr >
+             <td  rowspan="4"></td>
+            <th>Subtítulo</th>
+            <td colspan="5"><%=h livro.identificacao.subtitulo %></td>
           </tr>
           <tr>
-            <td rowspan="3" valign="top"><%=h livro.isbn.titulo %></td>
-            <td><%=h livro.isbn.autor %></td>
-            <td align="center"><%=h livro.id %></td>
-            <td align="center"><%=h livro.tombo %></td>
-            <td align="center"><%=h livro.isbn.nisbn %></td>
-            <td><%=h livro.isbn.colecao %></td>
-            <td><%=h livro.area.nome %></td>
-        </tr>
-        <tr>
-            <th>Assunto1</th>
-            <th>Assunto2</th>
-            <th>Assunto3</th>
-            <th>Editora</th>
-            <th>Localização</th>
-            <th>Unidade</th>
-         </tr>
-            <td><%=h livro.assunto1 %></td>
-            <td><%=h livro.assunto2 %></td>
-            <td><%=h livro.assunto3%></td>
-            <td><%=h livro.isbn.editora.nome %></td>
-            <td><%=h livro.localguardado %></td>
-            <td><%=h livro.unidade.nome %></td>
-        <tr>
+             <th>Autor</th>
+             <td colspan="6"><%=h livro.identificacao.autor %></td>
+          </tr>
+          <tr>
+             <th>Tombo (SEDUC)</th>
+             <th>Tombo (Local)</th>
+             <th>Area</th>
+             <th>Localização</th>
+             <th>Unidade</th>
+          </tr>
+          <tr>
+             <td align="center">LV<%=h livro.id %></td>
+             <td align="center"><%=h livro.tomboL %></td>
+             <td><%=h livro.area.area %></td>
+             <td><% livro.localizacaos.each do |p| %>
+                   <%= p.localguardado%>
+                 <%end%>
+             </td>
+             <td><% livro.localizacaos.each do |p| %>
+                   <%= p.unidade.nome%>
+                <%end%>
+             </td>
+          </tr>
+          <tr>
          <td colspan="7">
            <div class="botao">
             <table >

@@ -1,5 +1,5 @@
 class Unidade < ActiveRecord::Base
-
+has_and_belongs_to_many :livros
 belongs_to :tipo
 has_many :protocolos
 has_many :users

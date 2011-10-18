@@ -1,0 +1,69 @@
+ <font  size="2">
+   <table  class="tabelas" border ="1" cellpadding="1" cellspacing="1" width="100%" >
+        <tr>
+            <td align="right" colspan="7">
+                <font color ="red "size="2">
+                   <b> Total de Livros:<%= @localizacaos.count %></b>
+                </font>
+            </td>
+         </tr>
+         <% @localizacaos.each do |local| %>
+          <tr>
+             <th>Título</th>
+             <td colspan="7"><%=h local.livro.identificacao.titulo %></td>
+          </tr>
+          <tr >
+             <td  rowspan="4"></td>
+            <th>Subtítulo</th>
+            <td colspan="5"><%=h local.livro.identificacao.subtitulo %></td>
+          </tr>
+          <tr>
+             <th>Autor</th>
+             <td colspan="6"><%=h local.livro.identificacao.autor %></td>
+          </tr>
+          <tr>
+             <th>Tombo (SEDUC)</th>
+             <th>Tombo (Local)</th>
+             <th>Area</th>
+             <th>Localização</th>
+             <th>Unidade</th>
+          </tr>
+          <tr>
+             <td align="center">LV<%=h local.livro.id %></td>
+             <td align="center"><%=h local.livro.tomboL %></td>
+             <td><%=h local.livro.area.area %></td>
+             <td><% local.livro.localizacaos.each do |p| %>
+                   <%= p.localguardado%>
+                 <%end%>
+             </td>
+             <td><% local.livro.localizacaos.each do |p| %>
+                   <%= p.unidade.nome%>
+                <%end%>
+             </td>
+          </tr>
+          <tr>
+         <td colspan="7">
+           <div class="botao">
+            <table >
+             <td><%= button_to('Exibir',{:action => "show", :id =>local}, :method => "get") %></td>
+               <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+                  <td> <%= button_to('Editar',{:action => "edit", :id =>local}, :method => "get") %></td>
+                     <% if current_user.has_role?('administrador')%>
+                       <td><%= button_to('Excluir',{:action => "destroy", :id =>local}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+                     <%end%>
+               <%end%>
+             </table>
+           </div>
+           </td>
+        </tr>
+        <% end %>
+  </table>
+  <div class="botao">
+    <table width="100%" align="left">
+      <tr>
+         <td align="left" width="8%" ><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+         <td align="left" ><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+     </tr>
+    </table>
+  </div>
+ </font>

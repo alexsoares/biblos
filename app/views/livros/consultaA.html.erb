@@ -1,0 +1,40 @@
+<br/>
+ <table  class="tabelas"   align="center" width="100%">
+   <tr>
+      <td align="left">
+         <font  size=5><b> ACERVO LIVROS</b></font>
+      </td>
+   </tr>
+   <tr>
+     <td colspan="2">
+        <br/>
+        <div class="botao">
+        <table width="100%" align="center">
+          <tr>
+             <td width="6%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+             <td width="6%" align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+             <td align="right">
+               <div class="botao">
+                <table>
+                  <tr>
+                    <% form_tag cons_assunto_livro_path, :method => 'get' do %>
+                     <td align="right"><font size="4"> Digitar Assunto:</font>
+                       <%= text_field_tag :search, params[:search] %>
+                       <%= submit_tag "Filtrar", :assunto => nil %>
+                     </td>
+                    <% end %>
+                  </tr>
+                </table>
+                </div>
+             </td>
+         </tr>
+
+       </table>
+       <br/>
+       </div>
+     </td>
+   </tr>
+  </table>
+<br/>
+
+

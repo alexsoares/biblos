@@ -7,7 +7,7 @@
   </tr>
   <% for area in @area %>
   <tr>
-    <td><font size="2"><%=h area.nome %></font></td>
+    <td><font size="2"><%=h area.area %></font></td>
       <div class="botao">
         <% if current_user.has_role?('administrador')%>
            <td align="right"><%= button_to('Excluir',{:action => "destroy", :id =>area}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>

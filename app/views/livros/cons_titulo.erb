@@ -14,7 +14,7 @@
             <div class="botao">
             <table>
               <tr>
-                <td><font  size="4" color="black"> Título: <%= collection_select :livro, :isbn_id,  @titulolivros, :id, :titulo, :include_blank => ' -- Selecione -- '  %></font></td>
+                <td><font  size="4" color="black"> Título: <%= collection_select :livro, :identificacao_id,  @identificacaos, :id, :titulo, :include_blank => ' -- Selecione -- '  %></font></td>
               </tr>
            </table>
            </div>
@@ -34,10 +34,10 @@
         </tr>
         <tr>
           <td>
-          <%= observe_field 'livro_isbn_id',
+          <%= observe_field 'livro_identificacao_id',
                :update => "listagem",
                :url    => { :action => 'lista_titulo' },
-               :with   => 'livro_isbn_id' %>
+               :with   => 'livro_identificacao_id' %>
             <div id="listagem"> </div>
          </td>
        </tr>

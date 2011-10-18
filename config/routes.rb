@@ -1,16 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :audiovisuais
-
   map.resources :audiovisuais
-
   map.resources :livros
-
   map.resources :localizacaos
-
   map.resources :identificacaos
-
-  map.resources :assuntoitens
-
   map.resources :editoras
   map.resources :areas
   map.resources :generomidias
@@ -34,12 +27,12 @@ ActionController::Routing::Routes.draw do |map|
 
   map.regras '/regras', :controller => 'livros', :action => 'regras'
 
-  map.cons_titulo_livro '/cons_titulo_livro', :controller => 'livros', :action => 'cons_titulo_livro'
+  # map.cons_titulo_livro '/cons_titulo_livro', :controller => 'livros', :action => 'cons_titulo_livro'
+  map.cons_titulo_livro '/cons_titulo_livro', :controller => 'livros', :action => 'titulo'
   map.cons_area_livro '/cons_area_livro', :controller => 'livros', :action => 'cons_area_livro'
-  map.cons_assunto_livro '/cons_assunto_livro', :controller => 'livros', :action => 'cons_assunto_livro'
+  map.cons_assunto_livro '/cons_assunto_livro', :controller => 'livros', :action => 'assunto'
   map.cons_isbn_livro '/cons_isbn_livro', :controller => 'livros', :action => 'cons_isbn_livro'
   map.cons_unidade_livro'/cons_unidade_livro', :controller => 'livros', :action => 'cons_unidade_livro'
-
 
   map.cons_faixaetaria_jogo '/cons_faixaetaria_jogo', :controller => 'jogos', :action => 'cons_faixaetaria_jogo'
   map.cons_titulo_jogo '/cons_titulo_jogo', :controller => 'jogos', :action => 'cons_titulo_jogo'

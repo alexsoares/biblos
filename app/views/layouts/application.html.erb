@@ -9,7 +9,7 @@
     <%= stylesheet_link_tag 'impressao', :media => "print" %>
     <%= stylesheet_link_tag 'calendar_impressao', :media => "print" %>
     <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css"%>
-    <%= javascript_include_tag 'jquery','jquery-ui','jrails' %>
+    <%= javascript_include_tag 'jquery-1.4.2.js','application.js','jquery.tools.min.js','jquery-ui','jrails' %>
 
 
  <style media="print">
@@ -183,12 +183,12 @@ display: none;
                        <%end%>
                        <li><a>Consultar</a>
                          <ul>
+                           <li><%= link_to('Cadastrados', livros_path)%></li>
                            <li><%= link_to('por Área',cons_area_livro_path) %></li>
                            <li><%= link_to('por Assunto',cons_assunto_livro_path) %></li>
-                           <li><%= link_to('por ISBN',cons_isbn_livro_path) %></li>
                            <li><%= link_to('por Título',cons_titulo_livro_path) %></li>
                            <li><%= link_to('por Unidade', cons_unidade_livro_path) %></li>
-                           <li><%= link_to('Todos')%></li>
+                           
                          </ul>
                        </li>
                      </ul>

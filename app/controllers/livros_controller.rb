@@ -2,12 +2,46 @@ class LivrosController < ApplicationController
   before_filter :load_areas
   before_filter :load_unidades
   before_filter :load_identificacaos
-
+  before_filter :load_editoras
+  before_filter :load_assuntos
   # GET /livros
   # GET /livros.xml
-  def index
-    @livros = Livro.all
 
+
+ def assunto
+ if (params[:search].nil? || params[:search].empty?)
+     render 'consultaA'
+ else
+     @assuntos = Assunto.find(:all,  :conditions => ["assunto like ?", "%" + params[:search].to_s + "%"])
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @livros }
+    end
+ end
+end
+
+
+
+def titulo
+ if (params[:search].nil? || params[:search].empty?)
+     render 'consultaL'
+ else
+    @livros = Livro.find(:all, :joins=> :identificacao, :conditions => ["titulo like ?", "%" + params[:search].to_s + "%"])
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @livros }
+    end
+ end
+end
+
+def index
+ if (params[:search].nil? || params[:search].empty?)
+     @livros = Livro.paginate :page => params[:page], :per_page => 15
+      $var = 0
+    else
+      @livros = Livro.find(:all, :joins=> :identificacao, :conditions => ["titulo like ?", "%" + params[:search].to_s + "%"])
+      $var = 1
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @livros }
@@ -30,7 +64,10 @@ class LivrosController < ApplicationController
   def new
     @livro = Livro.new
     1.times do
-      localizacao = @livro.localizacaos.build
+      @livro.localizacaos.build
+    end
+    2.times do
+      @livro.assuntos.build
     end
 
     respond_to do |format|
@@ -100,18 +137,65 @@ class LivrosController < ApplicationController
   end
 
 
-protected
-
-  def load_areas
-      @areas = Area.find(:all, :order => 'area ASC')
+  def cons_area_livro
+    render 'cons_area'
   end
 
-    def load_unidades
+  def lista_area
+     $area = params[:livro_area_id]
+    @livros = Livro.find(:all, :conditions => ['area_id='+ $area])
+    render :partial => 'lista_consultas'
+  end
+
+    def cons_titulo_livro
+    render 'cons_titulo'
+  end
+
+def lista_titulo
+    session[:titulo] = params[:livro_identificacao_id]
+    @livros = Livro.find(:all, :conditions => ["identificacao_id =? " , session[:titulo]])
+    render :partial => 'lista_consultas'
+  end
+
+ def cons_unidade_livro
+    render 'cons_unidade'
+  end
+
+def lista_unidade
+      session[:unidade] = params[:livro_unidade_id]
+      @localizacaos = Localizacao.find(:all,  :conditions =>['unidade_id=' + session[:unidade]])
+      render :partial => 'lista_consultas_unidade'
+   end
+
+def lista_unidade_area_livro
+    session[:area] = params[:livro_area_id]
+    @localizacaos = Localizacao.all(:joins => ["livros l on l.a "], :conditions => ["livros.area_id=? and unidade_id= ?", +session[:area].to_i, + session[:unidade].to_i] )
+    render :partial => 'lista_consultas_unidade'
+    
+end
+
+
+
+protected
+
+def load_areas
+      @areas = Area.find(:all, :order => 'area ASC')
+end
+
+def load_unidades
       @unidades = Unidade.find(:all, :order => 'nome ASC')
   end
 
-  def load_identificacaos
+def load_identificacaos
       @identificacaos = Identificacao.find(:all, :order=> 'titulo ASC')
+end
+
+def load_editoras
+      @editoras = Editora.find(:all, :order => 'nome ASC')
+end
+
+def load_assuntos
+      @assuntos = Assunto.find(:all, :select => "DISTINCT assuntos.assunto" )
 end
 
 end
