@@ -89,4 +89,18 @@ class EditorasController < ApplicationController
 
   end
 
+  def mesma_editora
+    $editora = params[:editora_nome]
+    @verifica = Editora.find_by_nome($editora)
+    if @verifica then
+      render :update do |page|
+        page.replace_html 'nome_aviso', :text => 'EDITORA JÁ CADASTRADA, clicar botão VOLTAR para cadastrar nova EDITORA'
+        page.replace_html 'Certeza', :text => "<input id='editora_submit' name='commit' onclick=\"return confirm('SALVAR NOME DUPLICADO?');\" type='submit' value='SALVAR ?? ' />"
+    end
+    else
+      render :update do |page|
+        page.replace_html 'nome_aviso', :text => ''
+      end
+    end
+  end
 end

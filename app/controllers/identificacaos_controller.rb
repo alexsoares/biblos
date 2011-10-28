@@ -1,9 +1,12 @@
 class IdentificacaosController < ApplicationController
   # GET /identificacaos
   # GET /identificacaos.xml
+    before_filter :load_autors
+
+
   def index
     if (params[:search].nil? || params[:search].empty?)
-     @identificacaos = Identificacao.paginate :page => params[:page], :order => 'titulo ASC', :per_page => 15
+     @identificacaos = Identificacao.paginate :page => params[:page], :order => 'titulo ASC', :per_page => 15, :order => 'titulo ASC'
       $var = 0
     else
      @identificacaos = Identificacao.find(:all, :conditions => ["titulo like ?", "%" + params[:search].to_s + "%"], :order => 'titulo ASC')
@@ -29,9 +32,11 @@ class IdentificacaosController < ApplicationController
   # GET /identificacaos/new
   # GET /identificacaos/new.xml
   def new
-    @identificacao = Identificacao.new
-
-    respond_to do |format|
+    @identificacao=Identificacao.new
+     1.times do
+        @identificacao.autors.build
+     end
+     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @identificacao }
     end
@@ -92,5 +97,9 @@ class IdentificacaosController < ApplicationController
     render :partial => 'regras'
   end
 
+protected
 
+def load_autors
+      @autors = Autor.find(:all, :select => "DISTINCT nome", :order => 'nome ASC' )
+end
 end

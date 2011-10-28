@@ -1,0 +1,80 @@
+<br/>
+<% form_for(@dic_enc) do |f| %>
+<%= f.error_messages %>
+<font  size="2">
+ <table class="tabelas" width="70%" align="center">
+  <tr>
+   <td colspan="2" align="left">
+     <font  size=5><b> CADASTRO DE DICIONÁRIOS E ENCICLOPÉDIAS</b></font>
+   </td>
+  </tr>
+  <tr>
+    <td>
+      <fieldset><legend><font  size=4> Dicionários e Enciclopédias</font></legend>
+        <table>
+          <tr>
+            <td align="left" colspan="8">
+            <font color="red"> <b> <u>OBSERVAÇÕES:</u></b></font>
+              <font color="red">Selecionar o n° do <b>IDENTIFICADOR</b> para vizualizar o TITULO e outros dados já cadastrados do exemplar.</font>
+           </td>
+          </tr>
+          <tr>
+              <td align="left" width="10%"><b>Tombo(Local): </b></td>
+              <td align="left" colspan="4"><%= f.text_field :tomboL, :size =>10 %></td>
+          </tr>
+           <tr>
+             <td align="left"><b> Tipo:</b></td>
+             <td align="left" colspan="4" ><%= f.select :tipo, TIPODICENC.sort {|e0,e1| e0[0] <=> e1[0]}, :include_blank => '---Selecione---'%> </td>
+           </tr>
+          <tr>
+              <td align="left"><b>Identificador:</b></td>
+              <td align="left" colspan="4"><%= f.collection_select  :identificacao_id, @identificacaos, :id, :codigo, :include_blank => ' -- Selecione -- ' %>
+                   <font color="red">Nº ISBN que está na contra capa do livro</font>
+              </td>
+                   <%= observe_field 'dic_enc_identificacao_id',
+                       :update => "dados_codigo",
+                       :url    => { :action => 'identificador' },
+                       :with   => 'dic_enc_identificacao_id' %>
+           </tr>
+           <tr>
+             <td  colspan="5"> <div id="dados_codigo"></div></td>
+           </tr>
+           <tr>
+               <td align="left"><b> Volume:
+               <td align="left"></b><%= f.text_field :volume, :size =>5%>
+                   <b> Edição:</b><%= f.text_field :edicao , :size=> 1%><b>°</b> -
+                   <b> Ano Edição:</b><%= f.date_select(:data, :order => [:year], :start_year => (Date.today.year)-50) %>
+              </td>
+           </tr>
+           <tr>
+             <td align="left"><b> Editora:</b></td>
+             <td align="left" colspan="3"><%= f.collection_select  :editora_id, @editoras, :id, :nome, :include_blank => ' -- Selecione -- ' %>
+               -- <%= link_to "Nova Editora", new_editora_path%></td>
+           </tr>
+           <tr>
+               <td align="left" colspan="8">
+                  <% f.fields_for :localizacaos do |builder| %>
+                      <%= render "dadoslocalizacao", :f => builder %>
+                  <% end %>
+               </td>
+           </tr>
+           <tr >
+               <td align="left" valign="top"><b>Observações:</b></td>
+               <td align="left" colspan="8  "><%= f.text_area(:obs, :cols =>"58", :rows => "2") %></td>
+            </tr>
+        </table>
+     </fieldset>
+     <table>
+          <tr>
+            <div id='Certeza'>
+               <td align="left" width="8%"><%= f.submit "Salvar" %></td>
+            </div>
+            <% end %>
+            <td align="left" ><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+          </tr>
+      </table>
+    </td>
+   </tr>
+  </table>
+</font>
+

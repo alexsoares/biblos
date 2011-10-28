@@ -13,6 +13,7 @@
           <tr>
              <td width="6%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
              <td width="6%" align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+
              <td align="right" width="25%" >
                  <font color ="red "size="2">
                     <b> <%= @assuntos.count %> Livros encontrados</b>
@@ -42,6 +43,7 @@
        <font  size="2">
        <table border="2" width="100%">
          <%  @assuntos.each do |assunto| %>
+         <%if (assunto.livro_id.present?)%>
            <tr>
              <th>Título</th>
              <td colspan="7"><%=h assunto.livro.identificacao.titulo %></td>
@@ -53,7 +55,10 @@
           </tr>
           <tr>
              <th>Autor</th>
-             <td colspan="6"><%=h assunto.livro.identificacao.autor %></td>
+             <td colspan="6"><% assunto.livro.identificacao.autors.each do |p|%>
+                                <%=h p.nome%> /
+                             <%end%>
+             </td>
           </tr>
           <tr>
              <th>Assuntos:</th>
@@ -70,7 +75,7 @@
              <th>Unidade</th>
           </tr>
           <tr>
-             <td align="center">LV<%=h assunto.livro.id %></td>
+             <td align="center">LV-<%=h assunto.livro.id %></td>
              <td align="center"><%=h assunto.livro.tomboL %></td>
              <td><%=h assunto.livro.area.area %></td>
              <td><% assunto.livro.localizacaos.each do |p| %>
@@ -97,7 +102,8 @@
             </div>
            </td>
          </tr>
-        <% end %>
+         <%end%>
+        <%end%>
        </table>
        <div class="botao">
          <table width="100%" align="left">

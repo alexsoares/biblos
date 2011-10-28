@@ -8,38 +8,42 @@
   <tr>
     <td>
       <br/>
-       <table>
+       <table width="100%">
         <tr>
           <td>
             <div class="botao">
             <table>
               <tr>
-                <td align="left" width="65%"><font  size="4" color="black"> Unidade: <%= collection_select :livro, :unidade_id, @unidades, :id, :nome, :include_blank => ' -- Selecione -- '  %></font></td>
-                <td align="left"><font size ="3" color="red"> OBS: Selecionar primeiro a UNIDADE e depois, se desejar, outra opção de filtro em CONSULTA POR  </font></td>
+                <td align="left"><font size ="2" color="red"><u> OBSERVAÇÃO:</u> Selecionar primeiro a UNIDADE e depois, se desejar, outra opção de filtro em CONSULTA POR  </font></td>
               </tr>
+              <tr>
+                <td align="left" width="65%"><font  size="3" color="black"> Unidade: <%= collection_select :livro, :unidade_id, @unidades, :id, :nome, :include_blank => ' -- Selecione -- '  %></font></td>
+               </tr>
               <tr>
                <td colspan="3">
                 <fieldset><legend><font  size="3">Consulta por</font></legend>
                  <table>
                    <tr>
-                    <td align="left" colspan="2" ><font  size="3" color="black"> Título:</font></td>
+                    <td align="left"><font  size="3" color="black"> Área: <%= collection_select :livro,:area_id, @areas, :id, :area, :include_blank => ' -- Selecione -- '  %></font></td>
                   </tr>
                   <tr>
-                    <td align="left"><font  size="3" color="black"> Área: <%= collection_select :livro,:area_id, @areas, :id, :area, :include_blank => ' -- Selecione -- '  %></font></td>
-                    <td align="left"><font  size="3" color="black"> Assunto:</font></td>
-
+                    <td align="left" colspan="2" ><font  size="3" color="black"> Título:<%= collection_select :livro, :identificacao_id,  @identificacaos, :id, :titulo, :include_blank => ' -- Selecione -- '  %></font></td>
                   </tr>
+                  <tr>
+
+                    <td align="left"><font  size="3" color="black"> Assuntos:<%= collection_select :assunto, :assunto,  @assuntos, :assunto, :assunto, :include_blank => ' -- Selecione -- '  %></font></td>
+                   </tr>
                  </table>
                </fieldset>
               </td>
              </tr>
              <div class="botao">
-              <table width="100%" align="left">
+              <table width="100%" align="left" >
                 <tr>
                    <td align="left" width="8%" ><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
                    <td align="left" width="8%" ><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
                    <td align="left" width="8%"  ><%= button_to 'Nova Consulta', cons_unidade_livro_path, {:method => "get"} %></td>
-                   <td align="center"><font size ="3" color="red"> <=== Para realizar nova consulta clicar no botão <br/> NOVA CONSULTA  </font></td>
+                   <td align="center"><font size ="2" color="red"> <== Para realizar nova consulta clicar no botão NOVA CONSULTA  </font></td>
 
                </tr>
              </table>
@@ -50,7 +54,7 @@
         </tr>
         <tr>
           <td>
-          <%= observe_field 'livro_unidade_id',
+           <%= observe_field 'livro_unidade_id',
                :update => "listagem",
                :url    => { :action => 'lista_unidade' },
                :with   => 'livro_unidade_id' %>
@@ -60,20 +64,15 @@
                :url    => { :action => 'lista_unidade_area_livro' },
                :with   => 'livro_area_id' %>
             <div id="listagem"> </div>
-           <%= observe_field 'assunto_nome',
-               :update => "listagem",
-               :url    => { :action => 'lista_unidade_assunto_livro' },
-               :with   => 'assunto_nome' %>
-            <div id="listagem"> </div>
-           <%= observe_field 'livro_isbn_id',
+           <%= observe_field 'livro_identificacao_id',
                :update => "listagem",
                :url    => { :action => 'lista_unidade_titulo_livro' },
-               :with   => 'livro_isbn_id' %>
+               :with   => 'livro_identificacao_id' %>
             <div id="listagem"> </div>
-           <%= observe_field 'isbn_autor',
+            <%= observe_field 'assunto_assunto',
                :update => "listagem",
-               :url    => { :action => 'lista_unidade_autor_livro' },
-               :with   => 'isbn_autor' %>
+               :url    => { :action => 'lista_unidade_assunto_livro' },
+               :with   => 'assunto_assunto' %>
             <div id="listagem"> </div>
            </td>
        </tr>

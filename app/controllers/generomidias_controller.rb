@@ -89,4 +89,19 @@ def lista
 
   end
 
+def mesmo_nome
+    $nome = params[:generomidia_nome]
+    @verifica = Generomidia.find_by_nome($nome)
+    if @verifica then
+      render :update do |page|
+        page.replace_html 'nome_aviso', :text => 'GÊNERO JÁ CADASTRADA, clicar botão VOLTAR para cadastrar novo GÊNERO'
+        page.replace_html 'Certeza', :text => "<input id='editora_submit' name='commit' onclick=\"return confirm('SALVAR NOME DUPLICADO?');\" type='submit' value='SALVAR ?? ' />"
+    end
+    else
+      render :update do |page|
+        page.replace_html 'nome_aviso', :text => ''
+      end
+    end
+  end
+
 end

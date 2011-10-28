@@ -19,12 +19,16 @@
          <% @jogos.each do |jogo| %>
           <tr>
             <td align="center"><%=h jogo.id %></td>
-            <td align="center"><%=h jogo.tombo %></td>
+            <td align="center"><%=h jogo.tomboL %></td>
             <td><%=h jogo.nome %></td>
             <td><%=h jogo.faixaetaria %></td>
             <td><%=h jogo.descricao %></td>
-            <td><%=h jogo.localguardado %></td>
-            <td><%=h jogo.unidade.nome %></td>
+            <td><% jogo.localizacaos.each|p|%>
+                    <%=h p.localguardado %></td>
+                 <%end%>
+           <td><% jogo.localizacaos.each|p|%>
+                    <%=h p.unidade.nome %></td>
+                 <%end%>
         </tr>
       <tr>
          <td colspan="12">
@@ -41,7 +45,6 @@
            </div>
            </td>
         </tr>
-        <% end %>
        </table>
        <div class="botao">
          <table width="100%" align="left">

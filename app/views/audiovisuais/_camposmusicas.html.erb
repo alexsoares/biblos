@@ -1,0 +1,9 @@
+<table>
+  <tr>
+    <td align="left" colspan="8">
+      <% f.fields_for :musicas do |builder| %>
+        <%= render "musica", :f => builder %>
+      <% end %>
+    </td>
+           </tr>
+</table>

@@ -12,7 +12,9 @@ class Livro < ActiveRecord::Base
   validates_presence_of :area_id, :message => ' - ÁREA EM BRANCO - '
   validates_presence_of :editora_id, :message => ' - EDITORA EM BRANCO - '
   
-
+def before_save
+    self.assunto.upcase!
+end
 
 
 end

@@ -1,4 +1,14 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :musicas
+
+  map.resources :dic_encs
+
+  map.resources :periodicos
+
+  map.resources :mapas
+
+  map.resources :jogos
+  map.resources :autors
   map.resources :audiovisuais
   map.resources :audiovisuais
   map.resources :livros
@@ -9,7 +19,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :generomidias
   map.resources :assuntos
   map.resources :tipos
-
   map.resources :informativos
   map.resources :unidades, :collection => {:print_all => :get}
   map.resources :users
@@ -28,10 +37,14 @@ ActionController::Routing::Routes.draw do |map|
   map.regras '/regras', :controller => 'livros', :action => 'regras'
 
   # map.cons_titulo_livro '/cons_titulo_livro', :controller => 'livros', :action => 'cons_titulo_livro'
+  map.listamusica'/listamusica', :controller => 'musicas', :action => 'new'
+  map.listaassunto'/listaassunto', :controller => 'assuntos', :action => 'new'
+  map.listaautor'/listaautor', :controller => 'autors', :action => 'new'
+  
   map.cons_titulo_livro '/cons_titulo_livro', :controller => 'livros', :action => 'titulo'
   map.cons_area_livro '/cons_area_livro', :controller => 'livros', :action => 'cons_area_livro'
   map.cons_assunto_livro '/cons_assunto_livro', :controller => 'livros', :action => 'assunto'
-  map.cons_isbn_livro '/cons_isbn_livro', :controller => 'livros', :action => 'cons_isbn_livro'
+  map.teste '/teste', :controller => 'livros', :action => 'livros', :action => 'teste'
   map.cons_unidade_livro'/cons_unidade_livro', :controller => 'livros', :action => 'cons_unidade_livro'
 
   map.cons_faixaetaria_jogo '/cons_faixaetaria_jogo', :controller => 'jogos', :action => 'cons_faixaetaria_jogo'
@@ -47,6 +60,7 @@ ActionController::Routing::Routes.draw do |map|
   map.cons_unidade_pe'/cons_unidade_pe', :controller => 'periodicos', :action => 'cons_unidade_pe'
   map.cons_titulo_pe '/cons_titulo_pev', :controller => 'periodicos', :action => 'cons_titulo_pe'
 
+  map.cons_titulo_av '/cons_titulo_av', :controller => 'audiovisuais', :action => 'titulo'
   map.cons_genero_av '/cons_genero_av', :controller => 'audiovisuais', :action => 'cons_genero_av'
   map.cons_unidade_av '/cons_unidade_av', :controller => 'audiovisuais', :action => 'cons_unidade_av'
   map.cons_titulo_av '/cons_titulo_av', :controller => 'audiovisuais', :action => 'cons_titulo_av'

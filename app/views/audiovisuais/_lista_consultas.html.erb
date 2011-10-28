@@ -1,43 +1,58 @@
-   <font  size="2">
+<font  size="2">
    <table  class="tabelas" border ="1" cellpadding="1" cellspacing="1" width="100%" >
-           <tr>
-            <td align="right" colspan="8">
+        <tr>
+            <td align="right" colspan="7">
                 <font color ="red "size="2">
-                   <b> Total de Audiovisuais:<%= @audiovisuais.count %></b>
+                   <b> Total de Audivisuais:<%= @audiovisuais.count %></b>
                 </font>
             </td>
          </tr>
-         <tr>
-            <th>Tombo (SEDUC)</th>
-            <th>Tombo (Local)</th>
-            <th>Midia</th>
-            <th>Título</th>
-            <th>Coleção</th>
-            <th>Gênero</th>
-            <th>Localização</th>
-            <th>Unidade</th>
-          </tr>
-         <% @audiovisuais.each do |audiovisuai| %>
+         <% @audiovisuais.each do |audiovisual| %>
           <tr>
-            <td align="center"><%=h audiovisuai.id %></td>
-            <td align="center"><%=h audiovisuai.tombo %></td>
-            <td><%=h audiovisuai.tipo  %></td>
-            <td width="40%"><%=h audiovisuai.titulo %></td>
-            <td><%=h audiovisuai.colecao %></td>
-            <td><%=h audiovisuai.generomidia.nome %></td>
-            <td><%=h audiovisuai.localguardado %></td>
-            <td><%=h audiovisuai.unidade.nome %></td>
+             <th>Título</th>
+             <td colspan="6"><%=h audiovisual.titulo %></td>
+          </tr>
+          <tr>
+             <td  rowspan="4"></td>
+            <th>Subtítulo</th>
+            <td colspan="5"><%=h audiovisual.subtitulo %></td>
+          </tr>
+          <tr>
 
-        </tr>
-      <tr>
-         <td colspan="12">
+            <th>Coleção</th>
+            <td colspan="5"><%=h audiovisual.colecao %></td>
+          </tr>
+          <tr>
+             <th>Tombo (SEDUC)</th>
+             <th>Tombo (Local)</th>
+             <th>Mídia</th>
+             <th>Gênero</th>
+             <th>Localização</th>
+             <th>Unidade</th>
+          </tr>
+          <tr>
+             <td align="center">AV<%=h audiovisual.id %></td>
+             <td align="center"><%=h audiovisual.tomboL %></td>
+             <td align="left"><%=h audiovisual.tipo %></td>
+             <td align="left"><%=h audiovisual.generomidia.nome %></td>
+             <td><% audiovisual.localizacaos.each do |p| %>
+                   <%= p.localguardado%>
+                 <%end%>
+             </td>
+             <td><% audiovisual.localizacaos.each do |p| %>
+                   <%= p.unidade.nome%>
+                <%end%>
+             </td>
+          </tr>
+          <tr>
+         <td colspan="7">
            <div class="botao">
             <table >
-             <td><%= button_to('Exibir',{:action => "show", :id =>audiovisuai}, :method => "get") %></td>
+             <td><%= button_to('Exibir',{:action => "show", :id =>audiovisual}, :method => "get") %></td>
                <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
-                  <td> <%= button_to('Editar',{:action => "edit", :id =>audiovisuai}, :method => "get") %></td>
+                  <td> <%= button_to('Editar',{:action => "edit", :id =>audiovisual}, :method => "get") %></td>
                      <% if current_user.has_role?('administrador')%>
-                       <td><%= button_to('Excluir',{:action => "destroy", :id =>audiovisuai}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+                       <td><%= button_to('Excluir',{:action => "destroy", :id =>audiovisual}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
                      <%end%>
                <%end%>
              </table>
@@ -55,3 +70,4 @@
     </table>
   </div>
  </font>
+

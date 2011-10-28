@@ -1,0 +1,43 @@
+<br/><br/>
+<table class="tabelas" align="center" width="50%">
+ <tr>
+     <td colspan="2" align="left">
+       <font  size=5 color="black"> <b>EDITORA</b></font>
+    </td>
+ </tr>
+ <tr>
+   <td>
+       <fieldset><legend><font  size=4> Editoras Cadastrados</font></legend>
+       <font  size="2">
+         <table width="100%">
+            <% for editora in @editoras %>
+             <tr>
+               <td width="20"><b>Nome:</b></td>
+               <td><%=h editora.nome %></td>
+            </tr>
+             <tr>
+               <td><b>Cidade:</b></td>
+               <td><%=h editora.cidade %></td>
+            </tr>
+             <tr>
+               <td><b>Pais:</b></td>
+               <td><%=h editora.pais %></td>
+            </tr>
+            <tr>
+               <td colspan="2"><font color="blue"> <b>___________________________________________________</b></font></td>
+            </tr>
+           <% end %>
+        </table>
+        </font>
+      </fieldset>
+      <div class="botao">
+       <table width="100%" align="left">
+          <tr>
+             <td width="8%"><%= button_to 'Voltar', new_editora_path, {:method => "get"}%></td>
+            <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+       </table>
+     </div>
+    </td>
+ </tr>
+</table>
+<br/>

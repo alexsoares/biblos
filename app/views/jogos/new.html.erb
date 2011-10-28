@@ -1,0 +1,61 @@
+<br/><br/>
+<% form_for(@jogo) do |f| %>
+<%= f.error_messages %>
+<font  size="2">
+ <table class="tabelas" width="70%" align="center">
+  <tr>
+   <td colspan="2" align="left">
+     <font  size=5><b> CADASTRO DE JOGOS</b></font>
+   </td>
+  </tr>
+  <tr>
+    <td>
+      <fieldset><legend><font  size=4> Jogo</font></legend>
+        <table>
+           <tr>
+               <td align="left"><b>Tombo (Local):</b></td>
+               <td align="left" colspan="7"><%= f.text_field :tomboL, :size =>15 %></td>
+           </tr>
+           <tr>
+              <td align="left"><b> Nome:</b></td>
+              <td align="left"colspan="7"><%= f.text_field :nome, :size =>46 %></td>
+           </tr>
+           <tr>
+              <td align="left"><b>Fabricante:</b></td>
+              <td align="left"colspan="3"><%= f.text_field :fabricante, :size =>46 %></td>
+           </tr>
+           <tr>
+
+              <td align="left"><b>Faixa Etária:</b></td>
+              <td align="left"colspan="4"> <%= f.select :faixaetaria, FAIXAETARIA.sort {|e0,e1| e0[0] <=> e1[0]}, :include_blank => '---Selecione---'%></td>
+           </tr>
+           <tr>
+               <td align="left" valign="top"><b>Descrição:</b></td>
+               <td align="left" colspan="7"><%= f.text_area(:descricao, :cols =>"60", :rows => "2") %></td>
+           </tr>
+
+           <tr>
+               <td align="left" colspan="8">
+                  <% f.fields_for :localizacaos do |builder| %>
+                      <%= render "dadoslocalizacao", :f => builder %>
+                  <% end %>
+               </td>
+           </tr>
+            <tr>
+               <td align="left" valign="top"><b>Observações:</b></td>
+               <td align="left" colspan="7"><%= f.text_area(:obs, :cols =>"60", :rows => "2") %></td>
+            </tr>
+       </table>
+      </fieldset>
+      <table>
+          <tr>
+            <div id='Certeza'>
+               <td align="left" width="8%"><%= f.submit "Salvar" %></td>
+            </div>
+            <% end %>
+           <td align="left" ><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+          </tr>
+      </table>
+ </table>
+</font>
+

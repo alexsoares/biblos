@@ -2,7 +2,7 @@ class AreasController < ApplicationController
   # GET /areas
   # GET /areas.xml
   def index
-    @areas = Area.all
+    @areas = Area.all(:select => 'distinct area')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -83,9 +83,19 @@ class AreasController < ApplicationController
     end
   end
 
-def lista
-    @area = Area.find(:all)
-    render :partial => 'lista_area'
 
+def mesma_area
+    $area = params[:area_area]
+    @verifica = Area.find_by_area($area)
+    if @verifica then
+      render :update do |page|
+        page.replace_html 'nome_aviso', :text => 'ÁREA JÁ CADASTRADA, clicar botão VOLTAR para cadastrar nova ÁREA'
+        page.replace_html 'Certeza', :text => "<input id='editora_submit' name='commit' onclick=\"return confirm('SALVAR NOME DUPLICADO?');\" type='submit' value='SALVAR ?? ' />"
+    end
+    else
+      render :update do |page|
+        page.replace_html 'nome_aviso', :text => ''
+      end
+    end
   end
 end

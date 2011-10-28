@@ -12,7 +12,7 @@
       <table>
         <tr>
            <td align="left"><b>Tombo (SEDCUC):</b></td>
-           <td align="left">LV<%=h @livro.id %></td>
+           <td align="left">LV-<%=h @livro.id %></td>
         </tr>
         <tr>
            <td align="left"><b>Tombo (Local):</b></td>
@@ -29,6 +29,14 @@
        <tr>
          <td align="left"><b>Subtítulo:</b></td>
          <td align="left"><%=h @livro.identificacao.subtitulo %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> Autor:</b></td>
+         <td align="left">
+              <% @livro.identificacao.autors.each do |p| %>
+                <%= p.nome%><br/>
+              <%end%>
+         </td>
        </tr>
        <tr>
          <td align="left"><b> Coleção:</b></td>
@@ -51,10 +59,6 @@
          <td align="left">  <%=h @livro.localedicao %></td>
        </tr>
        <tr>
-         <td align="left"><b> Autor:</b></td>
-         <td align="left">   <%=h @livro.identificacao.autor%></td>
-       </tr>
-       <tr>
          <td align="left"><b> Área:</b></td>
          <td align="left">   <%=h @livro.area.area %></td>
        </tr>
@@ -70,8 +74,6 @@
          <td align="left"><b>Resumo:</b></td>
          <td align="left">   <%=h @livro.resumo %></td>
        </tr>
-
-
        <tr>
          <td align="left"><b>Forma Aquisição:</b></td>
          <td align="left">
@@ -84,7 +86,7 @@
          <td align="left"><b> Data Aquisição:</b></td>
          <td align="left"> 
           <% @livro.localizacaos.each do |p| %>
-            <%= p.dataaquisicao.strftime("%d/%m/%Y")%>
+            <%= p.dataaquisicao.strftime("%Y")%>
           <%end%>
          </td>
        </tr>

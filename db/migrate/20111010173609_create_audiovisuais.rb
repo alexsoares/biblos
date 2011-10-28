@@ -1,16 +1,18 @@
 class CreateAudiovisuais < ActiveRecord::Migration
   def self.up
     create_table :audiovisuais do |t|
-      t.references :genero
-      t.references :localizacao
+      t.references :generomidia
       t.string :tomboS
       t.string :tomboL
+      t.string :tipo
       t.string :titulo
       t.string :subtitulo
+      t.string :colecao
       t.string :producao
-      t.string :produtor
-      t.datetime :dataporducao
+      t.datetime :dataproducao
       t.string :localproducao
+      t.string :aquisicao
+      t.datetime :dataaquisicao
       t.string :obs
 
       t.timestamps

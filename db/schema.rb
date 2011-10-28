@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111017175142) do
+ActiveRecord::Schema.define(:version => 20111027140712) do
 
   create_table "areas", :force => true do |t|
     t.string   "area"
@@ -25,16 +25,40 @@ ActiveRecord::Schema.define(:version => 20111017175142) do
   end
 
   create_table "audiovisuais", :force => true do |t|
-    t.integer  "genero_id"
-    t.integer  "localizacao_id"
+    t.integer  "generomidia_id"
     t.string   "tomboS"
     t.string   "tomboL"
     t.string   "titulo"
+    t.string   "tipo"
     t.string   "subtitulo"
+    t.string   "colecao"
     t.string   "producao"
     t.string   "produtor"
-    t.datetime "dataporducao"
+    t.datetime "dataproducao"
     t.string   "localproducao"
+    t.string   "aquisicao"
+    t.datetime "dataaquisicao"
+    t.string   "obs"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "autors", :force => true do |t|
+    t.integer  "identificacao_id"
+    t.string   "nome"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "dic_encs", :force => true do |t|
+    t.string   "tomboL"
+    t.string   "tomboS"
+    t.string   "tipo"
+    t.integer  "identificacao_id"
+    t.string   "volume"
+    t.integer  "editora_id"
+    t.string   "edicao"
+    t.datetime "data"
     t.string   "obs"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -66,7 +90,6 @@ ActiveRecord::Schema.define(:version => 20111017175142) do
     t.string   "codigo"
     t.string   "titulo"
     t.string   "subtitulo"
-    t.string   "autor"
     t.string   "obs"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -76,6 +99,18 @@ ActiveRecord::Schema.define(:version => 20111017175142) do
     t.text     "mensagem"
     t.datetime "starts_at"
     t.datetime "ends_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "jogos", :force => true do |t|
+    t.string   "tomboL"
+    t.string   "tomboS"
+    t.string   "nome"
+    t.string   "fabricante"
+    t.string   "faixaetaria"
+    t.string   "descricao"
+    t.string   "obs"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -102,11 +137,38 @@ ActiveRecord::Schema.define(:version => 20111017175142) do
   end
 
   create_table "localizacaos", :force => true do |t|
+    t.integer  "periodico_id"
     t.integer  "unidade_id"
     t.integer  "livro_id"
+    t.integer  "audiovisuai_id"
+    t.integer  "jogo_id"
+    t.integer  "mapa_id"
+    t.integer  "dic_enc_id"
     t.string   "localguardado"
     t.string   "aquisicao"
     t.datetime "dataaquisicao"
+    t.string   "obs"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "mapas", :force => true do |t|
+    t.string   "tomboL"
+    t.string   "tomboS"
+    t.string   "titulo"
+    t.string   "tipo"
+    t.string   "formato"
+    t.integer  "editora_id"
+    t.datetime "data"
+    t.string   "obs"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "musicas", :force => true do |t|
+    t.string   "nome"
+    t.string   "interprete"
+    t.integer  "audovisuai_id"
     t.string   "obs"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -120,6 +182,21 @@ ActiveRecord::Schema.define(:version => 20111017175142) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "chat_session"
+  end
+
+  create_table "periodicos", :force => true do |t|
+    t.string   "tomboL"
+    t.string   "tomboS"
+    t.string   "tipo"
+    t.string   "titulo"
+    t.string   "periodicidade"
+    t.string   "issn"
+    t.integer  "num"
+    t.integer  "editora_id"
+    t.datetime "data"
+    t.string   "obs"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "roles", :force => true do |t|

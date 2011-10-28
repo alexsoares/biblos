@@ -22,7 +22,7 @@
                 <fieldset><legend><font  size="3">Consulta por</font></legend>
                  <table>
                    <tr>
-                     <td align="left" width="40%"><font  size="3" color="black"> Gênero: <%= collection_select :audiovisuai, :generomidia_id, @generomidias, :id, :nome, :include_blank => ' -- Selecione -- '  %></font></td>
+                     <td align="left"><font  size="3" color="black"> Gênero: <%= collection_select :audiovisuai, :generomidia_id, @generomidias, :id, :nome, :include_blank => ' -- Selecione -- '  %></font></td>
                      <td colspan="2"align="left"><font  size="3" color="black"> Mídia:<%= select :audiovisuai,:tipo, TIPOSMIDIA.sort {|e0,e1| e0[0] <=> e1[0]}, :include_blank => '---Selecione---'%></font></td>
                    </tr>
                    <tr>

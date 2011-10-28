@@ -1,0 +1,123 @@
+<br/>
+ <table  class="tabelas"   align="center" width="100%">
+   <tr>
+      <td align="left">
+         <font  size=5><b> ACERVO AUDIOVISUAIS - MUSICAS
+         </b></font>
+      </td>
+   </tr>
+   <tr>
+     <td colspan="2">
+        <br/>
+        <div class="botao">
+        <table width="100%" align="center">
+          <tr>
+             <td width="6%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+             <td width="6%" align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+
+             <td align="right" width="25%" >
+                 <font color ="red "size="2">
+                    <b> <%= @musicas.count %> Livros encontrados</b>
+                  </font>
+             </td>
+             <td align="right">
+               <div class="botao">
+                <table>
+                  <tr>
+                    <% form_tag cons_musica_audiovisual_path, :method => 'get' do %>
+                     <td align="right"><font size="4"> Digitar Assunto:</font>
+                       <%= text_field_tag :search, params[:search] %>
+                       <%= submit_tag "Filtrar", :nome => nil %>
+                     </td>
+                    <% end %>
+                  </tr>
+                </table>
+                </div>
+             </td>
+         </tr>
+         <tr>
+
+         </tr>
+       </table>
+       <br/>
+       </div>
+       <font  size="2">
+       <table border="2" width="100%">
+         <%  @musicas.each do |muisca| %>
+         <%if (musica.audiovisuai_id.present?)%>
+           <tr>
+             <th>Música</th>
+             <td colspan="7"><%=h musica.audiovisuai.nome %></td>
+          </tr>
+          <tr >
+             <td  rowspan="5"></td>
+            <th>Subtítulo</th>
+            <td colspan="5"><%=h assunto.livro.identificacao.subtitulo %></td>
+          </tr>
+          <tr>
+             <th>Autor</th>
+             <td colspan="6"><% assunto.livro.identificacao.autors.each do |p|%>
+                                <%=h p.nome%> /
+                             <%end%>
+             </td>
+          </tr>
+          <tr>
+             <th>Assuntos:</th>
+             <td colspan="6"><% assunto.livro.assuntos.each do |p| %>
+                                <%=h p.assunto%> /
+                             <%end%>
+            </td>
+          </tr>
+          <tr>
+             <th>Tombo (SEDUC)</th>
+             <th>Tombo (Local)</th>
+             <th>Area</th>
+             <th>Localização</th>
+             <th>Unidade</th>
+          </tr>
+          <tr>
+             <td align="center">LV-<%=h assunto.livro.id %></td>
+             <td align="center"><%=h assunto.livro.tomboL %></td>
+             <td><%=h assunto.livro.area.area %></td>
+             <td><% assunto.livro.localizacaos.each do |p| %>
+                   <%= p.localguardado%>
+                 <%end%>
+             </td>
+             <td><% assunto.livro.localizacaos.each do |p| %>
+                   <%= p.unidade.nome%>
+                <%end%>
+             </td>
+          </tr>
+          <tr>
+            <td colspan="12">
+             <div class="botao">
+              <table >
+                <td><%= button_to('Exibir',{:action => "show", :id =>assunto}, :method => "get") %></td>
+                <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+                   <td> <%= button_to('Editar',{:action => "edit", :id =>assunto}, :method => "get") %></td>
+                      <% if current_user.has_role?('administrador')%>
+                       <td><%= button_to('Excluir',{:action => "destroy", :id =>assunto}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+                     <%end%>
+               <%end%>
+             </table>
+            </div>
+           </td>
+         </tr>
+         <%end%>
+        <%end%>
+       </table>
+       <div class="botao">
+         <table width="100%" align="left">
+          <br/>
+          <tr>
+              <td width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+              <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+
+
+        </table>
+        </div>
+     </font>
+  </table>
+<br/>
+
+

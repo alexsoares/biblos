@@ -2,7 +2,7 @@
  <table  class="tabelas"   align="center" width="100%">
    <tr>
       <td align="left">
-         <font  size=5><b> ACERVO LIVROS</b></font>
+        <font  size=5><b> ACERVO AUDIOVISUAL</b></font>
       </td>
    </tr>
    <tr>
@@ -13,14 +13,19 @@
           <tr>
              <td width="6%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
              <td width="6%" align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+             <td align="right" width="25%" >
+                 <font color ="red "size="2">
+                    <b> Total:<%= @audiovisuais.count %></b>
+                  </font>
+             </td>
              <td align="right">
                <div class="botao">
                 <table>
                   <tr>
-                    <% form_tag cons_assunto_livro_path, :method => 'get' do %>
-                     <td align="right"><font size="4"> Digitar Assunto:</font>
+                    <% form_tag audiovisuais_path, :method => 'get' do %>
+                     <td align="right"><font size="4"> Digitar Titulo:</font>
                        <%= text_field_tag :search, params[:search] %>
-                       <%= submit_tag "Filtrar", :assunto => nil %>
+                       <%= submit_tag "Filtrar", :titulo => nil %>
                      </td>
                     <% end %>
                   </tr>
@@ -28,13 +33,11 @@
                 </div>
              </td>
          </tr>
-
        </table>
        <br/>
        </div>
-     </td>
-   </tr>
   </table>
 <br/>
+
 
 

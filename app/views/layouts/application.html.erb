@@ -61,7 +61,7 @@ display: none;
               Acesso de Administrador do Sistema
             <%else%>
               <% if current_user.has_role?('bibliotecario') %>
-                  Acesso de Bibliotecario(a)
+                  Acesso de Responsável Biblioteca
                   <%else%>
                     <% if current_user.has_role?('SEDUC') %>
                        Acesso de Funcinário(a) SEDUC
@@ -119,7 +119,8 @@ display: none;
                       <ul>
                         <li><%= link_to "Areas",new_area_path %></li>
                         <li><%= link_to "Assuntos",new_assunto_path %></li>
-                         <li><%= link_to "Editoras",new_editora_path %></li>
+                        <li><%= link_to "Autores",new_autor_path %></li>
+                        <li><%= link_to "Editoras",new_editora_path %></li>
                         <li><%= link_to "Gênero Midia",new_generomidia_path %></li>
                         <li><a>Identificador</a>
                            <ul>
@@ -129,7 +130,15 @@ display: none;
                               <li><%= link_to "Consultar", identificacaos_path %></li>
                            </ul>
                         </li>
-                        <li><%= link_to "Tipo Unidade",new_tipo_path %></li>
+                        <li><a>Música</a>
+                           <ul>
+                             <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+                                 <li><%= link_to "Cadastrar", new_musica_path %></li>
+
+                             <%end%>
+                              <li><%= link_to "Consultar", musicas_path %></li>
+                           </ul>
+                        </li>
                       </ul>
                   </li>
                   <% if current_user.has_role?('administrador') %>
@@ -156,7 +165,22 @@ display: none;
                            <li><%= link_to('por Gênero', cons_genero_av_path) %></li>
                            <li><%= link_to('por Título', cons_titulo_av_path) %></li>
                            <li><%= link_to('por Unidade', cons_unidade_av_path) %></li>
-                           <li><%= link_to('Todos')%></li>
+                           <li><%= link_to('Todos', audiovisuais_path)%></li>
+                         </ul>
+                      </li>
+                    </ul>
+                   </li>
+                  <li><a>Dicion. & Enciclop.</a>
+                    <ul>
+                         <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+                           <li id="about"><%= link_to_remote('Cadastrar', :update => 'conteudo',:url => { :action => "regras", :controller => 'dic_encs'}) %></li>
+                        <%end%>
+                        <li><a>Consultar</a>
+                         <ul>
+                           <li><%= link_to('por Gênero', cons_genero_av_path) %></li>
+                           <li><%= link_to('por Título', cons_titulo_av_path) %></li>
+                           <li><%= link_to('por Unidade', cons_unidade_av_path) %></li>
+                           <li><%= link_to('Todos', dic_encs_path)%></li>
                          </ul>
                       </li>
                     </ul>
@@ -171,7 +195,7 @@ display: none;
                            <li><%= link_to('por Faixa Etária',cons_faixaetaria_jogo_path) %></li>
                            <li><%= link_to('por Título',cons_titulo_jogo_path) %></li>
                            <li><%= link_to('por Unidade', cons_unidade_jogo_path) %></li>
-                           <li><%= link_to('Todos')%></li>
+                           <li><%= link_to('Todos',jogos_path)%></li>
                          </ul>
                        </li>
                      </ul>
@@ -183,12 +207,11 @@ display: none;
                        <%end%>
                        <li><a>Consultar</a>
                          <ul>
-                           <li><%= link_to('Cadastrados', livros_path)%></li>
                            <li><%= link_to('por Área',cons_area_livro_path) %></li>
                            <li><%= link_to('por Assunto',cons_assunto_livro_path) %></li>
                            <li><%= link_to('por Título',cons_titulo_livro_path) %></li>
                            <li><%= link_to('por Unidade', cons_unidade_livro_path) %></li>
-                           
+                           <li><%= link_to('Todos', livros_path)%></li>
                          </ul>
                        </li>
                      </ul>
@@ -203,7 +226,7 @@ display: none;
                            <li><%= link_to('por Tipo',cons_tipo_mapa_path) %></li>
                            <li><%= link_to('por Título',cons_titulo_mapa_path) %></li>
                            <li><%= link_to('por Unidade', cons_unidade_mapa_path) %></li>
-                           <li><%= link_to('Todos')%></li>
+                           <li><%= link_to('Todos', mapas_path)%></li>
                          </ul>
                        </li>
                      </ul>
@@ -219,7 +242,7 @@ display: none;
                            <li><%= link_to('por Tipo',cons_tipo_pe_path) %></li>
                            <li><%= link_to('por Título',cons_titulo_pe_path) %></li>
                            <li><%= link_to('por Unidade', cons_unidade_pe_path) %></li>
-                           <li><%= link_to('Todos')%></li>
+                           <li><%= link_to('Todos', periodicos_path)%></li>
                          </ul>
                        </li>
                      </ul>

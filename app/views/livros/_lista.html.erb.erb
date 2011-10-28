@@ -1,7 +1,7 @@
       <table >
           <tr>
               <td align="left"><b>Tombo (SEDUC):</b></td>
-              <td align="left" colspan="5"><font color="blue"><b><%=h @livro.id %></b></font>
+              <td align="left" colspan="5"><font color="blue"><b>LV-<%=h @livro.id %></b></font>
                    -- <b>Tombo(Local):</b><%= f.text_field :tombo, :size =>8 %>
                    <b>ISBN:</b><%= f.collection_select  :isbn_id, @isbns, :id, :nisbn, :include_blank => ' -- Selecione -- ' %>
                  <%= observe_field 'livro_isbn_id',

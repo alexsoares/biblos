@@ -2,7 +2,7 @@ class AssuntosController < ApplicationController
   # GET /assuntos
   # GET /assuntos.xml
   def index
-    @assuntos = Assunto.all
+    @assuntos = Assunto.all(:select => 'distinct assunto')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -23,6 +23,15 @@ class AssuntosController < ApplicationController
 
   # GET /assuntos/new
   # GET /assuntos/new.xml
+
+  def new
+    @assunto = Assunto.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @assunto }
+    end
+  end
   def new
     @assunto = Assunto.new
 
@@ -41,11 +50,10 @@ class AssuntosController < ApplicationController
   # POST /assuntos.xml
   def create
     @assunto = Assunto.new(params[:assunto])
-
     respond_to do |format|
       if @assunto.save
         flash[:notice] = 'CADASTRADO COM SUCESSO.'
-        format.html { redirect_to(new_assunto_path) }
+        format.html { redirect_to(homes_path) }
         format.xml  { render :xml => @assunto, :status => :created, :location => @assunto }
       else
         format.html { render :action => "new" }
@@ -84,8 +92,22 @@ class AssuntosController < ApplicationController
   end
 
 def lista
-    @assunto = Assunto.find(:all)
+  @assunto = Assunto.find(:all)
     render :partial => 'lista_assunto'
+   end
 
+def mesmo_assunto
+    $assunto = params[:assunto_assunto]
+    @verifica = Assunto.find_by_assunto($assunto)
+    if @verifica then
+      render :update do |page|
+        page.replace_html 'nome_aviso', :text => 'ASSUNTO JÁ CADASTRADO, clicar botão VOLTAR para cadastrar novo Assunto'
+        page.replace_html 'Certeza', :text => "<input id='autor_submit' name='commit' onclick=\"return confirm('SALVAR NOME DUPLICADO?');\" type='submit' value='SALVAR ?? ' />"
+    end
+    else
+      render :update do |page|
+        page.replace_html 'nome_aviso', :text => ''
+      end
+    end
   end
 end

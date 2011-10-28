@@ -1,0 +1,15 @@
+<table>
+  <tr>
+    <td align="left"><b>Música:</b></td>
+    <td align="left"><%= f.collection_select  :nome, @musicas, :nome, :nome, :include_blank => ' -- Selecione -- ' %></td>
+    <td  align="left">-- <%= link_to "Nova Música", listamusica_path%> --</td>
+  </tr>
+  <tr>
+    <td align="left"><b>Interprete:</b></td>
+    <td align="left"><%= f.collection_select  :interprete, @musicas, :interprete, :interprete, :include_blank => ' -- Selecione -- ' %></td>
+  </tr>
+</table>
+
+<br/><br/>
+
+   

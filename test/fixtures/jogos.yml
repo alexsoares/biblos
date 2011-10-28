@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  tomboL: MyString
+  tomboS: MyString
+  nome: MyString
+  faixaetaria: MyString
+  aquisicao: MyString
+  dataaquisicao: 2011-10-21 14:54:18
+  obs: MyString
+
+two:
+  tomboL: MyString
+  tomboS: MyString
+  nome: MyString
+  faixaetaria: MyString
+  aquisicao: MyString
+  dataaquisicao: 2011-10-21 14:54:18
+  obs: MyString

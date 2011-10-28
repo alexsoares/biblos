@@ -1,11 +1,11 @@
 
 <br/><br/>
-<table class="tabelas" align="center" width="100%">
+<table class="tabelas" align="center" width="50%">
  <tr>
      <td colspan="2" align="left">
-       <font  size=5 color="black"> <b>  ASSUNTOS</b></font>
+       <font  size=5 color="black"> <b>ASSUNTOS</b></font>
     </td>
-   </tr>
+ </tr>
  <tr>
  <td>
  <font  size="2">
@@ -16,59 +16,38 @@
         <fieldset><legend><font  size=4> Cadastrar Assuntos</font></legend>
          <table>
            <tr>
-             <td width="20%"align="left" colspan="3"><b>Assunto:</b>
-                 <%= f.text_field :assunto %>
-                   <%= observe_field 'assunto_nome',
-                      :frequency => 0.1,
-                      :update => "cadastrados",
-                      :with => :assunto_assunto,
-                     :url => { :action => 'lista' } %>
-            </td>
-          </tr>
-           <tr>
-            <div class="botao">
-               <td align="left"width="1%" ><%= f.submit "Salvar" %></td>
-               <% end %>
-               <td align="left" width="1%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
-               <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
-            </div>
-          </tr>
-         </table>
-        </fieldset>
-        <br/>
-        <fieldset><legend><font color="red"> OBSERVAÇÕES:</font></legend>
-        <table>
-           <tr><td align="left"><font color="red">1)VERIFICAR ASSUNTOS CADASTRADOS ANTES DE CADAS- TRAR UM NOVO.</font> </td></tr>
-           <tr><td align="left"><font color="red">2)PARA CONSULTAR DIGITE A PRIMEIRA LETRA NA CAIXA "ASSUNTO" .</font> </td></tr>
-           <tr><td align="left"><font color="red">3)VERIFICAR À ESQUERDA ASSUNTOS JÁ CADASTRADOS. </font> </td></tr>
-           
-        </table>
-        </fieldset>
-
-
-
-
-
-     </td>
-     <td width="50%" valign="top">
-         <fieldset><legend><font  size=4> Assuntos Cadastrados</font></legend>
-          <table width="100%">
-           <tr>
-              <td align="left">
-                <div id="cadastrados"></div>
-              </td>
+            <td valign="top"><font color="red"><b><u>OBSERVAÇÃO:</u></b></font>
+            <td colspan="2"><font color="red"><b>Digitar o nome e aguardar o sistema consultar se o Autor já está cadastrado antes de clicar o botão SALVAR</b></font></td>
            </tr>
-          </table>
-         </fieldset>
-       </td>
-     </tr>
-   </table>
-  </font>
- </td>
+           <tr>
+             <td width="20%"align="left" colspan="3"><b>Assunto:</b><%= f.text_field :assunto %>
+                 <%= observe_field :assunto_assunto,
+                    :with => :assunto_assunto,
+                    :url => { :action => 'mesmo_assunto' } %>
+             </td>
+           <tr>
+           <tr>
+              <td colspan="3">
+                <font color="red"><b><div id='nome_aviso'></div></b></font>
+             </td>
+          </tr>
+          <tr>
+            <div class="botao">
+              <td align="right"width="1%" >
+                <div id='Certeza'><%= f.submit "Salvar" %></div>
+              </td>
+                <% end %>
+             <td align=""width="1%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+             <td align="left"><%= button_to 'Cadastrados', assuntos_path, {:method => "get"}%></td>
+           </div>
+         </tr>
+      </table>
+    </fieldset>
+   <br/>
+  </td>
+ </tr>
+ </table>
+ </font>
+</td>
 </table>
 <br/>
-
-
-
-
-

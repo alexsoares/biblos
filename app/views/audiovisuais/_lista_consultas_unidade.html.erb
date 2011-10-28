@@ -1,0 +1,80 @@
+<font  size="2">
+   <table  class="tabelas" border ="1" cellpadding="1" cellspacing="1" width="100%" >
+    <%$quanti = 0%>
+    <% @localizacaos.each do |local| %>
+      <% if (local.audiovisuai_id.present?)  %>
+        <%$quanti = $quanti + 1%>
+         <tr>
+             <th>Título</th>
+             <td colspan="7"><%=h local.audiovisuai.titulo %></td>
+          </tr>
+          <tr >
+             <td  rowspan="5"></td>
+            <th>Subtítulo</th>
+            <td colspan="5"><%=h local.audiovisuai.subtitulo %></td>
+          </tr>
+          <tr>
+             <th width="15%">Coleção:</th>
+             <td colspan="6"><%=h local.audiovisuai.colecao %></td>
+          </tr>
+          <tr>
+             <th>Producao/Autor</th>
+             <td colspan="6"><%=h local.audiovisuai.producao%>
+             </td>
+          </tr>
+          <tr>
+             <th>Tombo (SEDUC)</th>
+             <th>Tombo (Local)</th>
+             <th>Tipo</th>
+             <th>Gênero</th>
+             <th>Localização</th>
+             <th>Unidade</th>
+          </tr>
+          <tr>
+             <td align="center">LV-<%=h local.audiovisuai.id %></td>
+             <td align="center"><%=h local.audiovisuai.tomboL %></td>
+             <td align="left"><%=h local.audiovisuai.tipo %></td>
+             <td align="left"><%=h local.audiovisuai.generomidia.nome%></td>
+             <td><% local.audiovisuai.localizacaos.each do |p| %>
+                   <%= p.localguardado%>
+                 <%end%>
+             </td>
+             <td><% local.audiovisuai.localizacaos.each do |p| %>
+                   <%= p.unidade.nome%>
+                <%end%>
+             </td>
+          </tr>
+          <tr>
+         <td colspan="7">
+           <div class="botao">
+            <table >
+             <td><%= button_to('Exibir',{:action => "show", :id =>local.audiovisuai_id}, :method => "get") %></td>
+               <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+                  <td> <%= button_to('Editar',{:action => "edit", :id =>local.audiovisuai_id}, :method => "get") %></td>
+                     <% if current_user.has_role?('administrador')%>
+                       <td><%= button_to('Excluir',{:action => "destroy", :id =>local.audiovisuai_id}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+                     <%end%>
+               <%end%>
+             </table>
+           </div>
+           </td>
+        </tr>
+        <% end %>
+      <% end %>
+            <tr>
+            <td align="right" colspan="7">
+                <font color ="red "size="2">
+                   <b> Total de Audiovisuais: </b><%= $quanti%>
+                </font>
+            </td>
+         </tr>
+  </table>
+  <div class="botao">
+    <table width="100%" align="left">
+      <tr>
+         <td align="left" width="8%" ><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+         <td align="left" ><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+     </tr>
+    </table>
+  </div>
+ </font>

@@ -1,42 +1,119 @@
-<h1>Listing audiovisuais</h1>
+<br/>
+ <table  class="tabelas"   align="center" width="100%">
+   <tr>
+      <td align="left">
+        <font  size=5><b> ACERVO AUDIOVISUAL</b></font>
+      </td>
+   </tr>
+   <tr>
+     <td colspan="2">
+        <br/>
+        <div class="botao">
+        <table width="100%" align="center">
+          <tr>
+             <td width="6%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+             <td width="6%" align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+             <td align="right" width="25%" >
+                 <font color ="red "size="2">
+                    <b> Total:<%= @audiovisuais.count %></b>
+                  </font>
+             </td>
+             <td align="right">
+               <div class="botao">
+                <table>
+                  <tr>
+                    <% form_tag audiovisuais_path, :method => 'get' do %>
+                     <td align="right"><font size="4"> Digitar Titulo:</font>
+                       <%= text_field_tag :search, params[:search] %>
+                       <%= submit_tag "Filtrar", :titulo => nil %>
+                     </td>
+                    <% end %>
+                  </tr>
+                </table>
+                </div>
+             </td>
+         </tr>
+         <tr>
+           <% if  $var == 0 then %>
+             <td align="left" colspan="4"><%= will_paginate @audiovisuais %></td>
+           <%end%>
+         </tr>
+       </table>
+       <br/>
+       </div>
+       <font  size="2">
+       <table border="2" width="100%">
+         <% @audiovisuais.each do |audiovisual| %>
+          <tr>
+             <th>Título</th>
+             <td colspan="6"><%=h audiovisual.titulo %></td>
+          </tr>
+          <tr>
+             <td  rowspan="4"></td>
+            <th>Subtítulo</th>
+            <td colspan="5"><%=h audiovisual.subtitulo %></td>
+          </tr>
+          <tr>
 
-<table>
-  <tr>
-    <th>Generomidia</th>
-    <th>Localizacao</th>
-    <th>Tombos</th>
-    <th>Tombol</th>
-    <th>Tipo</th>
-    <th>Titulo</th>
-    <th>Subtitulo</th>
-    <th>Producao</th>
-    <th>Produtor</th>
-    <th>Dataproducao</th>
-    <th>Localproducao</th>
-    <th>Obs</th>
-  </tr>
+            <th>Coleção</th>
+            <td colspan="5"><%=h audiovisual.colecao %></td>
+          </tr>
+          <tr>
+             <th>Tombo (SEDUC)</th>
+             <th>Tombo (Local)</th>
+             <th>Mídia</th>
+             <th>Gênero</th>
+             <th>Localização</th>
+             <th>Unidade</th>
+          </tr>
+          <tr>
+             <td align="center">AV<%=h audiovisual.id %></td>
+             <td align="center"><%=h audiovisual.tomboL %></td>
+             <td align="left"><%=h audiovisual.tipo %></td>
+             <td align="left"><%=h audiovisual.generomidia.nome %></td>
+             <td><% audiovisual.localizacaos.each do |p| %>
+                   <%= p.localguardado%>
+                 <%end%>
+             </td>
+             <td><% audiovisual.localizacaos.each do |p| %>
+                   <%= p.unidade.nome%>
+                <%end%>
+             </td>
+          </tr>
+          <tr>
+         <td colspan="7">
+           <div class="botao">
+            <table >
+             <td><%= button_to('Exibir',{:action => "show", :id =>audiovisual}, :method => "get") %></td>
+               <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+                  <td> <%= button_to('Editar',{:action => "edit", :id =>audiovisual}, :method => "get") %></td>
+                     <% if current_user.has_role?('administrador')%>
+                       <td><%= button_to('Excluir',{:action => "destroy", :id =>audiovisual}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+                     <%end%>
+               <%end%>
+             </table>
+           </div>
+           </td>
+        </tr>
+        <% end %>
+       </table>
+       <div class="botao">
+         <table width="100%" align="left">
+           <br/>
+          <tr>
+              <td width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+              <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+              <% if  $var == 0 then %>
+                 <td align="left" colspan="3"><%= will_paginate @audiovisuais %></td>
+              <%end%>
 
-<% @audiovisuais.each do |audiovisuai| %>
-  <tr>
-    <td><%=h audiovisuai.generomidia %></td>
-    <td><%=h audiovisuai.localizacao %></td>
-    <td><%=h audiovisuai.tomboS %></td>
-    <td><%=h audiovisuai.tomboL %></td>
-    <td><%=h audiovisuai.tipo %></td>
-    <td><%=h audiovisuai.titulo %></td>
-    <td><%=h audiovisuai.subtitulo %></td>
-    <td><%=h audiovisuai.producao %></td>
-    <td><%=h audiovisuai.produtor %></td>
-    <td><%=h audiovisuai.dataproducao %></td>
-    <td><%=h audiovisuai.localproducao %></td>
-    <td><%=h audiovisuai.obs %></td>
-    <td><%= link_to 'Show', audiovisuai %></td>
-    <td><%= link_to 'Edit', edit_audiovisuai_path(audiovisuai) %></td>
-    <td><%= link_to 'Destroy', audiovisuai, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+        </table>
+        </div>
+     </font>
+  </table>
+<br/>
 
-<br />
 
-<%= link_to 'New audiovisuai', new_audiovisuai_path %>
+
+
+

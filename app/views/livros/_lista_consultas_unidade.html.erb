@@ -1,25 +1,31 @@
- <font  size="2">
+<font  size="2">
    <table  class="tabelas" border ="1" cellpadding="1" cellspacing="1" width="100%" >
-        <tr>
-            <td align="right" colspan="7">
-                <font color ="red "size="2">
-                   <b> Total de Livros:<%= @localizacaos.count %></b>
-                </font>
-            </td>
-         </tr>
-         <% @localizacaos.each do |local| %>
-          <tr>
+    <%$livro = 0%>
+    <% @localizacaos.each do |local| %>
+      <% if (local.livro_id.present?)  %>
+         <tr>
              <th>Título</th>
              <td colspan="7"><%=h local.livro.identificacao.titulo %></td>
           </tr>
+            <%$livro = $livro + 1%>
           <tr >
-             <td  rowspan="4"></td>
+             <td  rowspan="5"></td>
             <th>Subtítulo</th>
             <td colspan="5"><%=h local.livro.identificacao.subtitulo %></td>
           </tr>
           <tr>
+             <th width="15%">Assuntos:</th>
+             <td colspan="6"><% local.livro.assuntos.each do |p| %>
+                                <%=h p.assunto%> /
+                             <%end%>
+            </td>
+          </tr>
+          <tr>
              <th>Autor</th>
-             <td colspan="6"><%=h local.livro.identificacao.autor %></td>
+             <td colspan="6"><% local.livro.identificacao.autors.each do |a| %>
+                                <%=h a.nome%> / 
+                             <%end%>
+             </td>
           </tr>
           <tr>
              <th>Tombo (SEDUC)</th>
@@ -29,9 +35,9 @@
              <th>Unidade</th>
           </tr>
           <tr>
-             <td align="center">LV<%=h local.livro.id %></td>
+             <td align="center">LV-<%=h local.livro.id %></td>
              <td align="center"><%=h local.livro.tomboL %></td>
-             <td><%=h local.livro.area.area %></td>
+             <td align="left"><%=h local.livro.area.area %></td>
              <td><% local.livro.localizacaos.each do |p| %>
                    <%= p.localguardado%>
                  <%end%>
@@ -57,6 +63,14 @@
            </td>
         </tr>
         <% end %>
+      <% end %>
+            <tr>
+            <td align="right" colspan="7">
+                <font color ="red "size="2">
+                   <b> Total de Livros: </b><%= $livro%>
+                </font>
+            </td>
+         </tr>
   </table>
   <div class="botao">
     <table width="100%" align="left">

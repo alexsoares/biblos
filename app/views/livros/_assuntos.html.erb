@@ -1,4 +1,7 @@
-   <tr>
-     <td></td>
-    <td valign="top"align="right"><b>Assuntos:</b><%= f.text_field :assunto %></td>
-  </tr>
+
+        <%= f.collection_select  :assunto, @assuntos, :assunto, :assunto, :include_blank => ' -- Selecione -- ' %>
+        -- <%= link_to "Novo Assunto", listaassunto_path%>
+
+<br/><br/>
+
+   

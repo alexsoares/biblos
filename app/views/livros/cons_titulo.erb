@@ -13,7 +13,7 @@
           <td>
             <div class="botao">
             <table>
-              <tr>
+              <tr><%= collection_select :livro, :identificacao_id,  @identificacaos, :id, :titulo, :include_blank => ' -- Selecione -- '  %>
                 <td><font  size="4" color="black"> Título: <%= collection_select :livro, :identificacao_id,  @identificacaos, :id, :titulo, :include_blank => ' -- Selecione -- '  %></font></td>
               </tr>
            </table>

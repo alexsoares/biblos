@@ -50,7 +50,10 @@
             <td><%=h identificacao.codigo %></td>
             <td><%=h identificacao.titulo %></td>
             <td><%=h identificacao.subtitulo %></td>
-            <td><%=h identificacao.autor %></td>
+            <td><%identificacao.autors.each do |p| %>
+                  <%=h p.nome%>
+                <%end%>
+            </td>
             <td><%=h identificacao.obs %></td>
          </tr>
          <tr>
@@ -84,33 +87,3 @@
   </table>
 <br/>
 
-
-
-<h1>Listing identificacaos</h1>
-
-<table>
-  <tr>
-    <th>Codigo</th>
-    <th>Titulo</th>
-    <th>Subtitulo</th>
-    <th>Autor</th>
-    <th>Obs</th>
-  </tr>
-
-<% @identificacaos.each do |identificacao| %>
-  <tr>
-    <td><%=h identificacao.codigo %></td>
-    <td><%=h identificacao.titulo %></td>
-    <td><%=h identificacao.subtitulo %></td>
-    <td><%=h identificacao.autor %></td>
-    <td><%=h identificacao.obs %></td>
-    <td><%= link_to 'Show', identificacao %></td>
-    <td><%= link_to 'Edit', edit_identificacao_path(identificacao) %></td>
-    <td><%= link_to 'Destroy', identificacao, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New identificacao', new_identificacao_path %>

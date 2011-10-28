@@ -12,7 +12,7 @@ class LivrosController < ApplicationController
  if (params[:search].nil? || params[:search].empty?)
      render 'consultaA'
  else
-     @assuntos = Assunto.find(:all,  :conditions => ["assunto like ?", "%" + params[:search].to_s + "%"])
+     @assuntos = Assunto.find(:all, :conditions => ["assunto like ?", "%" + params[:search].to_s + "%"])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @livros }
@@ -66,7 +66,7 @@ def index
     1.times do
       @livro.localizacaos.build
     end
-    2.times do
+    1.times do
       @livro.assuntos.build
     end
 
@@ -107,7 +107,6 @@ def index
   # PUT /livros/1.xml
   def update
     @livro = Livro.find(params[:id])
-
     respond_to do |format|
       if @livro.update_attributes(params[:livro])
         flash[:notice] = 'Livro was successfully updated.'
@@ -163,18 +162,27 @@ def lista_titulo
 
 def lista_unidade
       session[:unidade] = params[:livro_unidade_id]
-      @localizacaos = Localizacao.find(:all,  :conditions =>['unidade_id=' + session[:unidade]])
+      @localizacaos = Localizacao.find(:all,  :conditions =>['unidade_id= ?', session[:unidade]])
       render :partial => 'lista_consultas_unidade'
    end
 
 def lista_unidade_area_livro
     session[:area] = params[:livro_area_id]
-    @localizacaos = Localizacao.all(:joins => ["livros l on l.a "], :conditions => ["livros.area_id=? and unidade_id= ?", +session[:area].to_i, + session[:unidade].to_i] )
+     @localizacaos = Localizacao.all(:joins => :livro, :conditions => ["livros.area_id=? and unidade_id= ?", +session[:area].to_i, + session[:unidade].to_i] )
     render :partial => 'lista_consultas_unidade'
-    
 end
 
+def lista_unidade_titulo_livro
+    session[:identificacao] = params[:livro_identificacao_id]
+     @localizacaos = Localizacao.all(:joins => :livro, :conditions => ["livros.identificacao_id=? and unidade_id= ?", +session[:identificacao].to_i, + session[:unidade].to_i] )
+    render :partial => 'lista_consultas_unidade'
+end
 
+def lista_unidade_assunto_livro
+  session[:assunto] = params[:assunto_assunto]
+   @localizacaos = Localizacao.all(:joins =>' INNER JOIN livros ON localizacaos.livro_id= livros.id  INNER JOIN assuntos on  assuntos.livro_id=livros.id ', :conditions => ["assuntos.assunto=? and localizacaos.unidade_id=?", session[:assunto],session[:unidade] ])
+   render :partial => 'lista_consultas_unidade'
+end
 
 protected
 
@@ -195,7 +203,7 @@ def load_editoras
 end
 
 def load_assuntos
-      @assuntos = Assunto.find(:all, :select => "DISTINCT assuntos.assunto" )
+      @assuntos = Assunto.all(:select => "DISTINCT assunto")
 end
 
 end

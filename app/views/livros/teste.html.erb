@@ -1,0 +1,164 @@
+<br/><br/>
+<table class="tabelas" align="center" width="100%">
+ <tr>
+   <td colspan="2" align="left">
+      <font  size=5 color="black"> <b> CONSULTA LIVRO POR UNIDADE xxxxxx</b></font>
+   </td>
+  </tr>
+  <tr>
+    <td>
+      <br/>
+       <table>
+        <tr>
+          <td>
+            <div class="botao">
+            <table>
+              <tr>
+                <td align="left" width="65%"><font  size="4" color="black"> Unidade: <%= collection_select :livro, :unidade_id, @unidades, :id, :nome, :include_blank => ' -- Selecione -- '  %></font></td>
+                <td align="left"><font size ="3" color="red"> OBS: Selecionar primeiro a UNIDADE e depois, se desejar, outra opção de filtro em CONSULTA POR  </font></td>
+              </tr>
+              <tr>
+               <td colspan="3">
+                <fieldset><legend><font  size="3">Consulta por</font></legend>
+                 <table>
+                   <tr>
+                    <td align="left"><font  size="3" color="black"> Área: <%= collection_select :livro,:area_id, @areas, :id, :area, :include_blank => ' -- Selecione -- '  %></font></td>
+                  </tr>
+                  <tr>
+                    <td align="left" colspan="2" ><font  size="3" color="black"> Título:<%= collection_select :livro, :identificacao_id,  @identificacaos, :id, :titulo, :include_blank => ' -- Selecione -- '  %></font></td>
+                  </tr>
+                  <tr>
+                    <% form_tag teste_path, :method => 'get' do %>
+                     <td align="right"><font size="4"> Digitar Assunto:</font>
+                       <%= text_field_tag :search, params[:search] %>
+                       <%= submit_tag "Filtrar", :assunto => nil %>
+                     </td>
+                    <% end %>
+
+                    <td align="left"><font  size="3" color="black"> Assunto:<%= collection_select :assunto, :livro_id,  @assuntos, :id, :assunto, :include_blank => ' -- Selecione -- '  %></font></td>
+                   </tr>
+                 </table>
+               </fieldset>
+              </td>
+             </tr>
+             <div class="botao">
+              <table width="100%" align="left">
+                <tr>
+                   <td align="left" width="8%" ><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+                   <td align="left" width="8%" ><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+                   <td align="left" width="8%"  ><%= button_to 'Nova Consulta', cons_unidade_livro_path, {:method => "get"} %></td>
+                   <td align="center"><font size ="3" color="red"> <=== Para realizar nova consulta clicar no botão <br/> NOVA CONSULTA  </font></td>
+
+               </tr>
+             </table>
+            </div>
+           </table>
+          </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+           <%= observe_field 'livro_unidade_id',
+               :update => "listagem",
+               :url    => { :action => 'lista_unidade' },
+               :with   => 'livro_unidade_id' %>
+            <div id="listagem"> </div>
+           <%= observe_field 'livro_area_id',
+               :update => "listagem",
+               :url    => { :action => 'lista_unidade_area_livro' },
+               :with   => 'livro_area_id' %>
+            <div id="listagem"> </div>
+           <%= observe_field 'livro_identificacao_id',
+               :update => "listagem",
+               :url    => { :action => 'lista_unidade_titulo_livro' },
+               :with   => 'livro_identificacao_id' %>
+            <div id="listagem"> </div>
+            <%= observe_field 'assunto_livro_id',
+               :update => "listagem",
+               :url    => { :action => 'lista_unidade_assunto_livro' },
+               :with   => 'assunto_livro_id' %>
+            <div id="listagem"> </div>
+           </td>
+       </tr>
+    </table>
+   </td>
+
+          <font  size="2">
+       <table border="2" width="100%">
+         <%  @assuntos.each do |assunto| %>
+           <tr>
+             <th>Título</th>
+             <td colspan="7"><%=h assunto.livro.identificacao.titulo %></td>
+          </tr>
+          <tr >
+             <td  rowspan="5"></td>
+            <th>Subtítulo</th>
+            <td colspan="5"><%=h assunto.livro.identificacao.subtitulo %></td>
+          </tr>
+          <tr>
+             <th>Autor</th>
+             <td colspan="6"><%=h assunto.livro.identificacao.autor %></td>
+          </tr>
+          <tr>
+             <th>Assuntos:</th>
+             <td colspan="6"><% assunto.livro.assuntos.each do |p| %>
+                                <%=h p.assunto%> /
+                             <%end%>
+            </td>
+          </tr>
+          <tr>
+             <th>Tombo (SEDUC)</th>
+             <th>Tombo (Local)</th>
+             <th>Area</th>
+             <th>Localização</th>
+             <th>Unidade</th>
+          </tr>
+          <tr>
+             <td align="center">LV<%=h assunto.livro.id %></td>
+             <td align="center"><%=h assunto.livro.tomboL %></td>
+             <td><%=h assunto.livro.area.area %></td>
+             <td><% assunto.livro.localizacaos.each do |p| %>
+                   <%= p.localguardado%>
+                 <%end%>
+             </td>
+             <td><% assunto.livro.localizacaos.each do |p| %>
+                   <%= p.unidade.nome%>
+                <%end%>
+             </td>
+          </tr>
+          <tr>
+            <td colspan="12">
+             <div class="botao">
+              <table >
+                <td><%= button_to('Exibir',{:action => "show", :id =>assunto}, :method => "get") %></td>
+                <% if current_user.has_role?('administrador') or current_user.has_role?('bibliotecario') %>
+                   <td> <%= button_to('Editar',{:action => "edit", :id =>assunto}, :method => "get") %></td>
+                      <% if current_user.has_role?('administrador')%>
+                       <td><%= button_to('Excluir',{:action => "destroy", :id =>assunto}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+                     <%end%>
+               <%end%>
+             </table>
+            </div>
+           </td>
+         </tr>
+        <% end %>
+       </table>
+       <div class="botao">
+         <table width="100%" align="left">
+          <br/>
+          <tr>
+              <td width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+              <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+
+
+        </table>
+        </div>
+     </font>
+
+
+
+ </table>
+<br>
+
+
+

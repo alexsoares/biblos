@@ -18,9 +18,13 @@
          <td align="left"><b>Título:</b></td>
          <td align="left"><%=h @identificacao.titulo %></td>
        </tr>
-       <tr>
-         <td align="left"><b> Autor:</b></td>
-         <td align="left">   <%=h @identificacao.autor%></td>
+      <tr>
+         <td align="left" valign="top"><b> Autor:</b></td>
+         <td align="left">
+          <% @identificacao.autors.each do |p| %>
+            <%= p.nome%><br/>
+          <%end%>
+         </td>
        </tr>
        <tr>
          <td valign="top" align="left"><b>Observações:</b></td>
