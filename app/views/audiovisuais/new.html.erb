@@ -17,11 +17,11 @@
            </tr>
            <tr>
               <td align="left"><b>Tipo Midia:</b></td>
-              <td align="left"><%= f.select :tipo, TIPOSMIDIA.sort {|e0,e1| e0[0] <=> e1[0]}, :include_blank => '---Selecione---'%></td>
+              <td align="left"><%= f.select :tipo, TIPOSMIDIA.sort {|e0,e1| e0[0] <=> e1[0]}, :include_blank =>'---Selecione---'%></td>
               <td align="left"><b>Gênero:</b><%= f.collection_select  :generomidia_id, @generos, :id, :nome, :include_blank => ' -- Selecione -- ' %>
            </tr>
               <%= observe_field 'audiovisuai_generomidia_id',
-               :update => "campos",
+               :update => "check",
                :url    => { :action => 'camposmusicas' },
                :with   => 'audiovisuai_generomidia_id' %>
            <tr>
@@ -36,6 +36,7 @@
            </tr>
            <tr>
              <td align="left" colspan="5" >
+               <div id="check"></div>
               <div id="campos" style="display:none">
                 <% f.fields_for :musicas do |builder| %>
                   <%= render "musica", :f => builder %>

@@ -57,7 +57,6 @@ before_filter :load_musicas
   # POST /audiovisuais.xml
   def create
     @audiovisuai = Audiovisuai.new(params[:audiovisuai])
-
     respond_to do |format|
       if @audiovisuai.save
         flash[:notice] = 'Audiovisuai was successfully created.'

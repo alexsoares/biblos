@@ -25,26 +25,22 @@ ActiveRecord::Schema.define(:version => 20111027140712) do
   end
 
   create_table "audiovisuais", :force => true do |t|
-    t.integer  "generomidia_id"
+    t.integer  "genero_id"
+    t.integer  "localizacao_id"
     t.string   "tomboS"
     t.string   "tomboL"
     t.string   "titulo"
-    t.string   "tipo"
     t.string   "subtitulo"
-    t.string   "colecao"
     t.string   "producao"
     t.string   "produtor"
-    t.datetime "dataproducao"
+    t.datetime "dataporducao"
     t.string   "localproducao"
-    t.string   "aquisicao"
-    t.datetime "dataaquisicao"
     t.string   "obs"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "autors", :force => true do |t|
-    t.integer  "identificacao_id"
     t.string   "nome"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -90,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20111027140712) do
     t.string   "codigo"
     t.string   "titulo"
     t.string   "subtitulo"
+    t.string   "autor"
     t.string   "obs"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -108,8 +105,8 @@ ActiveRecord::Schema.define(:version => 20111027140712) do
     t.string   "tomboS"
     t.string   "nome"
     t.string   "fabricante"
-    t.string   "faixaetaria"
     t.string   "descricao"
+    t.string   "faixaetaria"
     t.string   "obs"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -137,13 +134,8 @@ ActiveRecord::Schema.define(:version => 20111027140712) do
   end
 
   create_table "localizacaos", :force => true do |t|
-    t.integer  "periodico_id"
     t.integer  "unidade_id"
     t.integer  "livro_id"
-    t.integer  "audiovisuai_id"
-    t.integer  "jogo_id"
-    t.integer  "mapa_id"
-    t.integer  "dic_enc_id"
     t.string   "localguardado"
     t.string   "aquisicao"
     t.datetime "dataaquisicao"

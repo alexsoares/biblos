@@ -1,9 +1,11 @@
-<table>
-  <tr>
-    <td align="left" colspan="8">
-      <% f.fields_for :musicas do |builder| %>
-        <%= render "musica", :f => builder %>
-      <% end %>
-    </td>
-           </tr>
-</table>
+             <script>
+               $(document).ready(function()
+                {
+                  $("#dropdownbutton9").click(function ()
+                   {
+                     $("#campos").slideToggle("high");
+                    });
+                });
+               </script>
+               <b>Musica(s)</b>
+               <a href="#" id="dropdownbutton9"><%= check_box_tag "audiovisuai[check]" %></a>SIM
